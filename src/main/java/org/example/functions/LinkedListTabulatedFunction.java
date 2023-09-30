@@ -130,47 +130,31 @@ public class LinkedListTabulatedFunction {
     }
 
     int indexOfX(double x) {
+
         int index = 0;
-        int i=0;
-        Node temp = head;
-        while ((temp.x != x) && (temp != head.prev)) {
-            temp = temp.next;
-            ++index;
-        }
-
-        if (temp == head.prev) {
+        for (Node temp = head; temp.next != head; temp = temp.next) {
             if (temp.x == x) {
-                i= index;
+                return index;
             }
-            else i= -1;
+            else index++;
         }
-        if (temp.x == x)
-            i=index;
-
-       return i;
+        return -1;
 
     }
 
     int indexOfY(double y) {
+
         int index = 0;
-        int i=0;
-        Node temp = head;
-        while ((temp.y != y) && (temp != head.prev)) {
-            temp = temp.next;
-            ++index;
-        }
-
-        if (temp == head.prev) {
+        for (Node temp = head; temp.next != head; temp = temp.next) {
             if (temp.y == y) {
-                i= index;
+                return index;
             }
-            else i= -1;
+            else index++;
         }
-        if (temp.y == y)
-            i=index;
-
-        return i;
+        return -1;
 
     }
+
+
 }
 

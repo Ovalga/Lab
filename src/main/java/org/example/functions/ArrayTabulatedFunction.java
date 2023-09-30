@@ -45,4 +45,24 @@ public class ArrayTabulatedFunction {
         }
 
     }
+    int getCount(){
+        return count;
+    }
+    double getX(int index){
+        return xValues[index];
+    }
+    double getY(int index){
+        return yValues[index];
+    }
+    void setY(int index, double value){
+        yValues[index] = value;
+    }
+    double leftBound(){
+        return xValues[0];
+    }
+    double rightBound(){
+        return xValues[count-1];
+    }
+
+
 }

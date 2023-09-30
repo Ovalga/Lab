@@ -28,7 +28,7 @@ public class ArrayTabulatedFunction {
             this.xValues = myArrayX;
             this.yValues = myArrayY;
         } else if (xTo > xFrom) {
-            double step = (xTo - xFrom) / count;
+            double step = (xTo - xFrom) / count-1;
             for (int i = 0; i < count; ++i) {
                 myArrayX[i] = xFrom + (i * step);
                 myArrayY[i] = source.apply(xFrom + (i * step));

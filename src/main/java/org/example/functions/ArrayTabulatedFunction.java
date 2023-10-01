@@ -69,6 +69,26 @@ public class ArrayTabulatedFunction {
     double rightBound() {
         return xValues[count - 1];
     }
+    int indexOfX(double x){
+       // int sizeArrayInIndex = count - 1;
+        int index = 0;
+        while(index<= count - 1){
+            if(xValues[index] == x)
+                return index;
+            else index++;
+        }
+        return -1;
+    }
+    int indexOfY(double x){
+        // int sizeArrayInIndex = count - 1;
+        int index = 0;
+        while(index<= count - 1){
+            if(yValues[index] == x)
+                return index;
+            else index++;
+        }
+        return -1;
+    }
 
 
 }

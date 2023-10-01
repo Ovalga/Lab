@@ -197,5 +197,37 @@ public class LinkedListTabulatedFunction {
 
 
     }
+    double interpolate(double x, int floorIndex) {
+        if (head.next == null) {
+            return x;
+        } else {
+            double leftX = getX(floorIndex - 1);
+            double rightX = getX(floorIndex);
+            double leftY = getY(floorIndex - 1);
+            double rightY = getY(floorIndex);
+            return interpolate(x, leftX, rightX, leftY, rightY);
+        }
+
+    }
+
+    double extrapolateLeft(double x) {
+        if (head.next == null) {
+            return x;
+        }
+       else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
+    }
+
+    double extrapolateRight(double x) {
+        if (head.next == null) {
+            return x;
+        }
+       else  return (head.prev.prev.y + (((head.prev.y- head.prev.prev.y) / (head.prev.x -head.prev.prev.x)) * (x - head.prev.prev.x)));
+    }
+    private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+        if (head.next == null) {
+            return x;
+        }
+        else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+    }
 }
 

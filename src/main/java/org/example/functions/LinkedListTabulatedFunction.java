@@ -140,14 +140,13 @@ public class LinkedListTabulatedFunction {
 
         if (temp == head.prev) {
             if (temp.x == x) {
-                i= index;
+                return index;
             }
-            else i= -1;
+            else  return -1;
         }
-        if (temp.x == x)
-            i=index;
+        else return index;
 
-        return i;
+
 
     }
 
@@ -162,14 +161,13 @@ public class LinkedListTabulatedFunction {
 
         if (temp == head.prev) {
             if (temp.y == y) {
-                i= index;
+                return index;
             }
-            else i= -1;
+           else  return -1;
         }
-        if (temp.y == y)
-            i=index;
+        else return index;
 
-        return i;
+
 
     }
 

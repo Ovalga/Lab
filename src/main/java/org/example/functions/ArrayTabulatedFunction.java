@@ -69,26 +69,48 @@ public class ArrayTabulatedFunction {
     double rightBound() {
         return xValues[count - 1];
     }
-    int indexOfX(double x){
-       // int sizeArrayInIndex = count - 1;
+
+    int indexOfX(double x) {
         int index = 0;
-        while(index<= count - 1){
-            if(xValues[index] == x)
-                return index;
-            else index++;
-        }
-        return -1;
-    }
-    int indexOfY(double x){
-        // int sizeArrayInIndex = count - 1;
-        int index = 0;
-        while(index<= count - 1){
-            if(yValues[index] == x)
-                return index;
+        while (index <= count - 1) {
+            if (xValues[index] == x) return index;
             else index++;
         }
         return -1;
     }
 
+    int indexOfY(double x) {
+        int index = 0;
+        while (index <= count - 1) {
+            if (yValues[index] == x) return index;
+            else index++;
+        }
+        return -1;
+    }
 
+    int floorIndexOfX(double x) {
+        if (xValues[0] > x) return 0;
+        else if (xValues[count - 1] < x) return count;
+        else {
+            for (int index = 0; ; index++) {
+                if (xValues[index] == x) return index;
+                else if (xValues[index] > x) return index - 1;
+            }
+        }
+    }
+
+    double interpolate(double x, int floorIndex) {
+        return (yValues[floorIndex - 1] + (((yValues[floorIndex] - yValues[floorIndex - 1]) / (xValues[floorIndex] - xValues[floorIndex - 1])) * (x - xValues[floorIndex - 1])));
+    }
+
+    double extrapolateLeft(double x) {
+        return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
+    }
+
+    double extrapolateRight(double x) {
+        return (yValues[count - 2] + (((yValues[count - 1] - yValues[count - 2]) / (xValues[count - 1] - xValues[count - 2])) * (x - xValues[count - 2])));
+    }
+    private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+        return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+    }
 }

@@ -110,4 +110,5 @@ class LinkedListTabulatedFunctionTest {
         assertNotEquals(0, linkedListTabulatedFunction2.extrapolateRight(1));
     }
 
+
 }

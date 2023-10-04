@@ -100,9 +100,16 @@ public class ArrayTabulatedFunction {
     }
 
     double interpolate(double x, int floorIndex) {
-        if (count == 1) return yValues[0];
-        else
-            return (yValues[floorIndex - 1] + (((yValues[floorIndex] - yValues[floorIndex - 1]) / (xValues[floorIndex] - xValues[floorIndex - 1])) * (x - xValues[floorIndex - 1])));
+        if (count == 1) {
+            return yValues[0];
+        } else {
+            double leftX = getX(floorIndex - 1);
+            double rightX = getX(floorIndex);
+            double leftY = getY(floorIndex - 1);
+            double rightY = getY(floorIndex);
+            return interpolate(x, leftX, rightX, leftY, rightY);
+        }
+
     }
 
     double extrapolateLeft(double x) {
@@ -121,5 +128,21 @@ public class ArrayTabulatedFunction {
         if (count == 1) return yValues[0];
         else
             return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+    }
+
+    double apply(double x) {
+        double result;
+        if (x < xValues[0]) {
+            result = extrapolateLeft(x);
+        } else if (x > xValues[count - 1]) {
+            result = extrapolateRight(x);
+        } else {
+            if (indexOfX(x) != -1) {
+                result = getY(indexOfX(x));
+            } else {
+                result = interpolate(x, floorIndexOfX(x));
+            }
+        }
+        return result;
     }
 }

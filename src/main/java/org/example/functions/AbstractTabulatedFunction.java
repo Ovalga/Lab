@@ -1,6 +1,6 @@
 package org.example.functions;
 
-abstract class AbstractTabulatedFunction {
+abstract class AbstractTabulatedFunction  {
     protected abstract double floorIndexOfX(double x);
     protected abstract double extrapolateLeft(double x);
     protected abstract double extrapolateRight(double x);

@@ -28,4 +28,5 @@ class CompositeFunctionTest {
         assertNotEquals(1, logMathFunction.andThen(cosMathFunction).apply(0));
     }
 
+
 }

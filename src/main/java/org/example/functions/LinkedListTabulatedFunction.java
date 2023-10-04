@@ -3,7 +3,6 @@ package org.example.functions;
 import java.util.Arrays;
 
 
-
 public class LinkedListTabulatedFunction {
     class Node {
 
@@ -17,6 +16,7 @@ public class LinkedListTabulatedFunction {
             this.y = y;
         }
     }
+
     private int count;
     private Node head;
 
@@ -132,7 +132,7 @@ public class LinkedListTabulatedFunction {
 
     int indexOfX(double x) {
         int index = 0;
-        int i=0;
+        int i = 0;
         Node temp = head;
         while ((temp.x != x) && (temp != head.prev)) {
             temp = temp.next;
@@ -142,18 +142,15 @@ public class LinkedListTabulatedFunction {
         if (temp == head.prev) {
             if (temp.x == x) {
                 return index;
-            }
-            else  return -1;
-        }
-        else return index;
-
+            } else return -1;
+        } else return index;
 
 
     }
 
     int indexOfY(double y) {
         int index = 0;
-        int i=0;
+        int i = 0;
         Node temp = head;
         while ((temp.y != y) && (temp != head.prev)) {
             temp = temp.next;
@@ -163,28 +160,21 @@ public class LinkedListTabulatedFunction {
         if (temp == head.prev) {
             if (temp.y == y) {
                 return index;
-            }
-           else  return -1;
-        }
-        else return index;
-
+            } else return -1;
+        } else return index;
 
 
     }
 
 
-    int floorIndexOfX(double x){
+    int floorIndexOfX(double x) {
         int index = 0;
-        if(head.x>x)
-        {
+        if (head.x > x) {
             return 0;
-        }
-        else if(head.prev.x<x){
+        } else if (head.prev.x < x) {
             return count;
-        }
-
-        else {
-            for (Node temp = head;; temp = temp.next) {
+        } else {
+            for (Node temp = head; ; temp = temp.next) {
                 if (temp.x == x) {
                     return index;
                 } else if (temp.x > x) {
@@ -196,8 +186,8 @@ public class LinkedListTabulatedFunction {
         }
 
 
-
     }
+
     double interpolate(double x, int floorIndex) {
         if (head.next == head) {
             return head.y;
@@ -214,21 +204,35 @@ public class LinkedListTabulatedFunction {
     double extrapolateLeft(double x) {
         if (head.next == head) {
             return head.y;
-        }
-       else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
+        } else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
     }
 
     double extrapolateRight(double x) {
         if (head.next == head) {
-            return  head.y;
-        }
-       else  return (head.prev.prev.y + (((head.prev.y- head.prev.prev.y) / (head.prev.x -head.prev.prev.x)) * (x - head.prev.prev.x)));
+            return head.y;
+        } else
+            return (head.prev.prev.y + (((head.prev.y - head.prev.prev.y) / (head.prev.x - head.prev.prev.x)) * (x - head.prev.prev.x)));
     }
+
     private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         if (head.next == head) {
-            return  head.y;
+            return head.y;
+        } else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+    }
+
+    double apply(double x) {
+        double result;
+        if (x < head.x) {
+            result = extrapolateLeft(x);
+        } else if (x > head.prev.x) {
+            result = extrapolateRight(x);
+        } else {
+            if (indexOfX(x) != -1) {
+                result = getY(indexOfX(x));
+            } else {
+                result = interpolate(x, floorIndexOfX(x));
+            }
         }
-        else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+        return result;
     }
 }
-

@@ -79,10 +79,10 @@ public class ArrayTabulatedFunction {
         return -1;
     }
 
-    int indexOfY(double x) {
+    int indexOfY(double y) {
         int index = 0;
         while (index <= count - 1) {
-            if (yValues[index] == x) return index;
+            if (yValues[index] == y) return index;
             else index++;
         }
         return -1;
@@ -100,25 +100,25 @@ public class ArrayTabulatedFunction {
     }
 
     double interpolate(double x, int floorIndex) {
-        if (count == 1) return x;
+        if (count == 1) return yValues[0];
         else
             return (yValues[floorIndex - 1] + (((yValues[floorIndex] - yValues[floorIndex - 1]) / (xValues[floorIndex] - xValues[floorIndex - 1])) * (x - xValues[floorIndex - 1])));
     }
 
     double extrapolateLeft(double x) {
-        if (count == 1) return x;
+        if (count == 1) return yValues[0];
         else
             return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
     }
 
     double extrapolateRight(double x) {
-        if (count == 1) return x;
+        if (count == 1) return yValues[0];
         else
             return (yValues[count - 2] + (((yValues[count - 1] - yValues[count - 2]) / (xValues[count - 1] - xValues[count - 2])) * (x - xValues[count - 2])));
     }
 
     private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
-        if (count == 1) return x;
+        if (count == 1) return yValues[0];
         else
             return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }

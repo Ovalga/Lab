@@ -2,20 +2,21 @@ package org.example.functions;
 
 import java.util.Arrays;
 
-class Node {
 
-    public double x;
-    public double y;
-    public Node next;
-    public Node prev;
-
-    Node(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 public class LinkedListTabulatedFunction {
+    class Node {
+
+        public double x;
+        public double y;
+        public Node next;
+        public Node prev;
+
+        Node(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
     private int count;
     private Node head;
 
@@ -198,8 +199,8 @@ public class LinkedListTabulatedFunction {
 
     }
     double interpolate(double x, int floorIndex) {
-        if (head.next == null) {
-            return x;
+        if (head.next == head) {
+            return head.y;
         } else {
             double leftX = getX(floorIndex - 1);
             double rightX = getX(floorIndex);
@@ -211,21 +212,21 @@ public class LinkedListTabulatedFunction {
     }
 
     double extrapolateLeft(double x) {
-        if (head.next == null) {
-            return x;
+        if (head.next == head) {
+            return head.y;
         }
        else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
     }
 
     double extrapolateRight(double x) {
-        if (head.next == null) {
-            return x;
+        if (head.next == head) {
+            return  head.y;
         }
        else  return (head.prev.prev.y + (((head.prev.y- head.prev.prev.y) / (head.prev.x -head.prev.prev.x)) * (x - head.prev.prev.x)));
     }
     private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
-        if (head.next == null) {
-            return x;
+        if (head.next == head) {
+            return  head.y;
         }
         else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }

@@ -3,7 +3,7 @@ package org.example.functions;
 import java.util.Arrays;
 
 
-public class LinkedListTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     class Node {
 
         public double x;
@@ -167,7 +167,7 @@ public class LinkedListTabulatedFunction {
     }
 
 
-    int floorIndexOfX(double x) {
+    protected int floorIndexOfX(double x) {
         int index = 0;
         if (head.x > x) {
             return 0;
@@ -188,7 +188,7 @@ public class LinkedListTabulatedFunction {
 
     }
 
-    double interpolate(double x, int floorIndex) {
+    protected double interpolate(double x, int floorIndex) {
         if (head.next == head) {
             return head.y;
         } else {
@@ -201,26 +201,26 @@ public class LinkedListTabulatedFunction {
 
     }
 
-    double extrapolateLeft(double x) {
+    protected double extrapolateLeft(double x) {
         if (head.next == head) {
             return head.y;
         } else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
     }
 
-    double extrapolateRight(double x) {
+    protected double extrapolateRight(double x) {
         if (head.next == head) {
             return head.y;
         } else
             return (head.prev.prev.y + (((head.prev.y - head.prev.prev.y) / (head.prev.x - head.prev.prev.x)) * (x - head.prev.prev.x)));
     }
 
-    private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         if (head.next == head) {
             return head.y;
         } else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
-    double apply(double x) {
+    protected double apply(double x) {
         double result;
         if (x < head.x) {
             result = extrapolateLeft(x);

@@ -2,7 +2,7 @@ package org.example.functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
     private double[] xValues;
     private double[] yValues;
     private int count;
@@ -88,7 +88,7 @@ public class ArrayTabulatedFunction {
         return -1;
     }
 
-    int floorIndexOfX(double x) {
+    protected int floorIndexOfX(double x) {
         if (xValues[0] > x) return 0;
         else if (xValues[count - 1] < x) return count;
         else {
@@ -99,7 +99,7 @@ public class ArrayTabulatedFunction {
         }
     }
 
-    double interpolate(double x, int floorIndex) {
+    protected double interpolate(double x, int floorIndex) {
         if (count == 1) {
             return yValues[0];
         } else {
@@ -112,25 +112,25 @@ public class ArrayTabulatedFunction {
 
     }
 
-    double extrapolateLeft(double x) {
+    protected  double extrapolateLeft(double x) {
         if (count == 1) return yValues[0];
         else
             return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
     }
 
-    double extrapolateRight(double x) {
+    protected double extrapolateRight(double x) {
         if (count == 1) return yValues[0];
         else
             return (yValues[count - 2] + (((yValues[count - 1] - yValues[count - 2]) / (xValues[count - 1] - xValues[count - 2])) * (x - xValues[count - 2])));
     }
 
-    private double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         if (count == 1) return yValues[0];
         else
             return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
-    double apply(double x) {
+   protected double apply(double x) {
         double result;
         if (x < xValues[0]) {
             result = extrapolateLeft(x);

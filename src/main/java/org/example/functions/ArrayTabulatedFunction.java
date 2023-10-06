@@ -2,7 +2,7 @@ package org.example.functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
     private double[] xValues;
     private double[] yValues;
     private int count;
@@ -46,31 +46,31 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
 
     }
 
-    int getCount() {
+    public int getCount() {
         return count;
     }
 
-    double getX(int index) {
+   public double getX(int index) {
         return xValues[index];
     }
 
-    double getY(int index) {
+    public double getY(int index) {
         return yValues[index];
     }
 
-    void setY(int index, double value) {
+    public void setY(int index, double value) {
         yValues[index] = value;
     }
 
-    double leftBound() {
+    public double leftBound() {
         return xValues[0];
     }
 
-    double rightBound() {
+    public double rightBound() {
         return xValues[count - 1];
     }
 
-    int indexOfX(double x) {
+    public int indexOfX(double x) {
         int index = 0;
         while (index <= count - 1) {
             if (xValues[index] == x) return index;
@@ -79,7 +79,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         return -1;
     }
 
-    int indexOfY(double y) {
+   public  int indexOfY(double y) {
         int index = 0;
         while (index <= count - 1) {
             if (yValues[index] == y) return index;
@@ -130,7 +130,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
             return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
-   protected double apply(double x) {
+   public double apply(double x) {
         double result;
         if (x < xValues[0]) {
             result = extrapolateLeft(x);

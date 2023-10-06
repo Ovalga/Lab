@@ -3,7 +3,7 @@ package org.example.functions;
 import java.util.Arrays;
 
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction implements TabulatedFunction {
     class Node {
 
         public double x;
@@ -65,15 +65,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     }
 
-    int getCount() {
+    public int getCount() {
         return count;
     }
 
-    double leftBound() {
+    public double leftBound() {
         return head.x;
     }
 
-    double rightBound() {
+    public double rightBound() {
         return head.prev.x;
     }
 
@@ -90,47 +90,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return temp;
     }
 
-    double getX(int index) {
-        if (index == 0) {
-            return head.x;
-        } else {
-            Node temp = head;
-            for (int i = 1; i <= index; i++) {
-                temp = temp.next;
-
-            }
-            return temp.x;
-        }
+    public double getX(int index) {
+        Node temp=getNode(index);
+        return temp.x;
     }
 
-    double getY(int index) {
-        if (index == 0) {
-            return head.y;
-        } else {
-            Node temp = head;
-            for (int i = 1; i <= index; i++) {
-                temp = temp.next;
-
-            }
-            return temp.y;
-        }
+    public double getY(int index) {
+        Node temp=getNode(index);
+        return temp.y;
     }
 
-    void setY(int index, double value) {
+    public void setY(int index, double value) {
 
-        if (index == 0) {
-            head.y = value;
-        } else {
-            Node temp = head;
-            for (int i = 1; i <= index; i++) {
-                temp = temp.next;
-
-            }
+        Node temp=getNode(index);
             temp.y = value;
-        }
+
     }
 
-    int indexOfX(double x) {
+    public  int indexOfX(double x) {
         int index = 0;
         int i = 0;
         Node temp = head;
@@ -148,7 +125,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     }
 
-    int indexOfY(double y) {
+    public int indexOfY(double y) {
         int index = 0;
         int i = 0;
         Node temp = head;
@@ -220,7 +197,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         } else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
-    protected double apply(double x) {
+    public double apply(double x) {
         double result;
         if (x < head.x) {
             result = extrapolateLeft(x);

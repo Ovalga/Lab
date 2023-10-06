@@ -87,7 +87,7 @@ public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction impl
             temp = temp.next;
 
         }
-        return temp;
+        return temp.prev;
     }
 
     public double getX(int index) {

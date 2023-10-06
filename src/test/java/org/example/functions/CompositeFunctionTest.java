@@ -28,5 +28,24 @@ class CompositeFunctionTest {
         assertNotEquals(1, logMathFunction.andThen(cosMathFunction).apply(0));
     }
 
+    @Test
+    public void andThanList()
+    {
+        double[] xValue = {0, 1.5, 2, 2.5, 3};
+        double[] yValue = {1, 0, 4, 5, 6};
+        MathFunction myTestFunction = new LinkedListTabulatedFunction(xValue, yValue);
+        MathFunction logTestFunction=new LogMathFunction();
+        MathFunction cosTestFunction=new CosMathFunction();
+        MathFunction logMy=logTestFunction.andThen(myTestFunction);
+        MathFunction cosMy=cosTestFunction.andThen(myTestFunction);
 
+        assertEquals(0,logMy.apply(0));
+        assertNotEquals(1,logMy.apply(0));
+        assertEquals(1,cosMy.apply(1.5));
+        assertNotEquals(0,cosMy.apply(1.5));
+
+
+
+
+    }
 }

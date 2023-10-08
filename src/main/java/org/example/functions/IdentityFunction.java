@@ -14,6 +14,7 @@ public class IdentityFunction implements MathFunction, Cloneable {
         return this.getClass() == o.getClass();
     }
 
+    @Override
     public Object clone() {
         return new IdentityFunction();
     }

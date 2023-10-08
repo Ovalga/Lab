@@ -1,10 +1,11 @@
 package org.example.functions;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 
-public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction implements TabulatedFunction {
-    class Node {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction {
+    static class Node {
 
         public double x;
         public double y;
@@ -14,6 +15,33 @@ public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction impl
         Node(double x, double y) {
             this.x = x;
             this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            String StrX = String.valueOf(x);
+            String StrY = String.valueOf(y);
+
+            return ("(" + StrX + ";" + StrY + ")" + ", где " + StrX + " и " + StrY + " – абсцисса и ордината точки соответственно.");
+        }
+
+        @Override
+        public Object clone() {
+            Node cloneNode = new Node(this.x, this.y);
+            cloneNode.prev = this.prev;
+            cloneNode.next = this.next;
+            return cloneNode;
+        }
+
+
+        @Override
+        public int hashCode() {
+            double floatX = (x - (int) x) * 1000;
+            int hashX = 12 * (int) x + 19 * (int) floatX;
+
+            double floatY = (y - (int) y) * 1000;
+            int hashY = 12 * (int) y + 19 * (int) floatY;
+            return hashX + hashY;
         }
     }
 
@@ -91,23 +119,23 @@ public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction impl
     }
 
     public double getX(int index) {
-        Node temp=getNode(index);
+        Node temp = getNode(index);
         return temp.x;
     }
 
     public double getY(int index) {
-        Node temp=getNode(index);
+        Node temp = getNode(index);
         return temp.y;
     }
 
     public void setY(int index, double value) {
 
-        Node temp=getNode(index);
-            temp.y = value;
+        Node temp = getNode(index);
+        temp.y = value;
 
     }
 
-    public  int indexOfX(double x) {
+    public int indexOfX(double x) {
         int index = 0;
         int i = 0;
         Node temp = head;
@@ -212,4 +240,6 @@ public class LinkedListTabulatedFunction  extends AbstractTabulatedFunction impl
         }
         return result;
     }
+
+
 }

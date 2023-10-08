@@ -10,8 +10,8 @@ class LinkedListTabulatedFunctionTest {
     double[] yValue = {2, 3, 4, 5, 6};
     double[] xValue2 = {5};
     double[] yValue2 = {2};
-    LinkedListTabulatedFunction linkedListTabulatedFunction=new LinkedListTabulatedFunction(xValue,yValue);
-    LinkedListTabulatedFunction linkedListTabulatedFunction2=new LinkedListTabulatedFunction(xValue2,yValue2);
+    LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValue, yValue);
+    LinkedListTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValue2, yValue2);
 
     @Test
     void getCount() {
@@ -52,7 +52,7 @@ class LinkedListTabulatedFunctionTest {
 
     @Test
     void indexOfX() {
-        assertEquals(1,linkedListTabulatedFunction.indexOfX(1.5));
+        assertEquals(1, linkedListTabulatedFunction.indexOfX(1.5));
         assertNotEquals(0, linkedListTabulatedFunction.indexOfX(1.5));
 
         assertEquals(-1, linkedListTabulatedFunction.indexOfX(10));
@@ -85,7 +85,7 @@ class LinkedListTabulatedFunctionTest {
 
     @Test
     void interpolate() {
-        assertEquals(3.4,linkedListTabulatedFunction.interpolate(1.7, 2));
+        assertEquals(3.4, linkedListTabulatedFunction.interpolate(1.7, 2));
         assertNotEquals(0, linkedListTabulatedFunction.interpolate(1.7, 2));
 
         assertEquals(2, linkedListTabulatedFunction2.interpolate(1.7, 1));
@@ -108,6 +108,29 @@ class LinkedListTabulatedFunctionTest {
 
         assertEquals(2, linkedListTabulatedFunction2.extrapolateRight(1));
         assertNotEquals(0, linkedListTabulatedFunction2.extrapolateRight(1));
+    }
+
+    @Test
+    void toStringTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(5, 2);
+        String str = node.toString();
+        assertEquals("(5.0;2.0), где 5.0 и 2.0 – абсцисса и ордината точки соответственно.", node.toString());
+        assertNotEquals("(5.1;2.1), где 5.1 и 2.1 – абсцисса и ордината точки соответственно.", node.toString());
+
+    }
+
+    @Test
+    void hashCodeTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(2.30, 5.72);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(2.30, 5.72);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(5, 6);
+
+
+        assertEquals(node2.hashCode(), node.hashCode());
+        assertNotEquals(10, node.hashCode());
+        assertNotEquals(node3.hashCode(), node.hashCode());
+
+
     }
 
 

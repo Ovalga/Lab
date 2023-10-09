@@ -133,5 +133,15 @@ class LinkedListTabulatedFunctionTest {
 
     }
 
+    @Test
+    void equalsNodeTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(2.1, 3.2);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(2.1, 3.2);
+        boolean bool = node.equals(node2);
+        assertTrue(bool);
+
+
+    }
+
 
 }

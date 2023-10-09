@@ -32,7 +32,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             cloneNode.next = this.next;
             return cloneNode;
         }
-
+        @Override
+        public boolean equals(Object o)
+        {
+            return (o.getClass()==this.getClass()&& ((((Node)o).x == x)
+                    && (((Node)o).y == y)));
+        }
 
         @Override
         public int hashCode() {

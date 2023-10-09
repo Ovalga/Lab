@@ -109,4 +109,23 @@ class ArrayTabulatedFunctionTest {
         assertNotEquals(0, arrayTabulatedFunction2.extrapolateRight(1));
     }
 
+    @Test
+    void toStringTest() {
+        assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", arrayTabulatedFunction.toString());
+        assertNotEquals("(0;0)", arrayTabulatedFunction.toString());
+
+        assertEquals("(5.0;2.0) ", arrayTabulatedFunction2.toString());
+        assertNotEquals("(0;0)", arrayTabulatedFunction2.toString());
+    }
+    @Test
+    void equalsTest() {
+        ArrayTabulatedFunction arrayTabulatedFunctionTest = new ArrayTabulatedFunction(xValue, yValue);
+        assertTrue(arrayTabulatedFunction.equals(arrayTabulatedFunctionTest));
+    }
+
+    @Test
+    void cloneTest() {
+        Object arrayTabulatedFunctionTest = arrayTabulatedFunction.clone();
+        assertTrue(arrayTabulatedFunction.equals(arrayTabulatedFunctionTest));
+    }
 }

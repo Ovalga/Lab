@@ -2,7 +2,7 @@ package org.example.functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction, Cloneable {
     private double[] xValues;
     private double[] yValues;
     private int count;
@@ -50,7 +50,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return count;
     }
 
-   public double getX(int index) {
+    public double getX(int index) {
         return xValues[index];
     }
 
@@ -79,7 +79,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return -1;
     }
 
-   public  int indexOfY(double y) {
+    public int indexOfY(double y) {
         int index = 0;
         while (index <= count - 1) {
             if (yValues[index] == y) return index;
@@ -112,7 +112,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     }
 
-    protected  double extrapolateLeft(double x) {
+    protected double extrapolateLeft(double x) {
         if (count == 1) return yValues[0];
         else
             return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
@@ -130,7 +130,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
-   public double apply(double x) {
+    public double apply(double x) {
         double result;
         if (x < xValues[0]) {
             result = extrapolateLeft(x);
@@ -144,6 +144,29 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             }
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        String xAndYStr = "";
+        for (int i = 0; i < count; i++) {
+            String StrX = String.valueOf(xValues[i]);
+            String StrY = String.valueOf(yValues[i]);
+            xAndYStr += "(" + StrX + ";" + StrY + ")" + " ";
+        }
+        return xAndYStr;
+    }
+    @Override
+    public boolean equals(Object o){
+        return this.getClass() == o.getClass() &&
+                Arrays.equals(((ArrayTabulatedFunction) o).xValues, xValues) &&
+                Arrays.equals(((ArrayTabulatedFunction) o).yValues, yValues);
+    }
+
+
+    @Override
+    public Object clone() {
+        return new ArrayTabulatedFunction(xValues.clone(), yValues.clone());
     }
 }
 

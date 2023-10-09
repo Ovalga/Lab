@@ -6,10 +6,12 @@ public class IdentityFunction implements MathFunction, Cloneable {
         return x;
     }
 
+    @Override
     public String toString() {
         return "Класс, реализующий интерфейс MathFunction, объекты которого должны выполнять тождественное преобразование";
     }
 
+    @Override
     public boolean equals(Object o) {
         return this.getClass() == o.getClass();
     }
@@ -17,6 +19,10 @@ public class IdentityFunction implements MathFunction, Cloneable {
     @Override
     public Object clone() {
         return new IdentityFunction();
+    }
+    @Override
+    public int hashCode() {
+        return 1912;
     }
 }
 

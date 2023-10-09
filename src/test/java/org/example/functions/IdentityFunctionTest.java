@@ -36,4 +36,12 @@ class IdentityFunctionTest {
         assertTrue(bool);
     }
 
+    @Test
+    public void hashCodeTest() {
+        IdentityFunction identityFunction = new IdentityFunction();
+        IdentityFunction identityFunction2 = new IdentityFunction();
+        assertEquals(1912, identityFunction.hashCode());
+        assertEquals(1912, identityFunction2.hashCode());
+    }
+
 }

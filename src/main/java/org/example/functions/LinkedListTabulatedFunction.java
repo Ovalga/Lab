@@ -32,11 +32,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             cloneNode.next = this.next;
             return cloneNode;
         }
+
         @Override
-        public boolean equals(Object o)
-        {
-            return (o.getClass()==this.getClass()&& ((((Node)o).x == x)
-                    && (((Node)o).y == y)));
+        public boolean equals(Object o) {
+            return (o.getClass() == this.getClass() && ((((Node) o).x == x)
+                    && (((Node) o).y == y)));
         }
 
         @Override
@@ -244,6 +244,32 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             }
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        String xAndYStr = "";
+        for (Node temp = head; temp != head.prev; temp = temp.next) {
+            String StrX = String.valueOf(temp.x);
+            String StrY = String.valueOf(temp.y);
+            xAndYStr += "(" + StrX + ";" + StrY + ")" + " ";
+        }
+        xAndYStr += "(" + String.valueOf(head.prev.x) + ";" + String.valueOf(head.prev.y) + ")" + " ";
+        return xAndYStr;
+    }
+
+
+
+
+    @Override
+    public int hashCode() {
+        int hashResult = 0;
+        for (Node temp = head; temp != head.prev; temp = temp.next) {
+
+            hashResult += temp.hashCode();
+        }
+        hashResult += head.prev.hashCode();
+        return hashResult;
     }
 
 

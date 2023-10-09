@@ -111,7 +111,7 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    void toStringTest() {
+    void toStringNodeTest() {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(5, 2);
         String str = node.toString();
         assertEquals("(5.0;2.0), где 5.0 и 2.0 – абсцисса и ордината точки соответственно.", node.toString());
@@ -120,7 +120,7 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    void hashCodeTest() {
+    void hashCodeNodeTest() {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(2.30, 5.72);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(2.30, 5.72);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(5, 6);
@@ -143,5 +143,31 @@ class LinkedListTabulatedFunctionTest {
 
     }
 
+    @Test
+    void cloneNodeTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(18.4, 28.1);
+        Object nodeCopy = node.clone();
+        assertTrue(node.equals(nodeCopy));
+    }
+
+    @Test
+    void toStringLinkTest() {
+        assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", linkedListTabulatedFunction.toString());
+        assertNotEquals("(0;0)", linkedListTabulatedFunction.toString());
+
+        assertEquals("(5.0;2.0) ", linkedListTabulatedFunction2.toString());
+        assertNotEquals("(0;0)", linkedListTabulatedFunction2.toString());
+    }
+
+    @Test
+    void hashCodeLinkTest() {
+        LinkedListTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(xValue, yValue);
+
+
+        assertEquals(linkedListTabulatedFunction.hashCode(), linkedListTabulatedFunction3.hashCode());
+        assertNotEquals(10, linkedListTabulatedFunction.hashCode());
+        assertNotEquals(linkedListTabulatedFunction3.hashCode(), linkedListTabulatedFunction2.hashCode());
+
+    }
 
 }

@@ -259,8 +259,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
 
-
-
     @Override
     public int hashCode() {
         int hashResult = 0;
@@ -272,5 +270,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return hashResult;
     }
 
-
+    @Override
+    public Object clone() {
+        double[] xArray = new double[count];
+        double[] yArray = new double[count];
+        int i = 0;
+        for (Node temp = head; temp != head.prev; temp = temp.next) {
+            xArray[i] = temp.x;
+            yArray[i] = temp.y;
+            i++;
+        }
+        xArray[count - 1] = head.prev.x;
+        yArray[count - 1] = head.prev.y;
+        return new LinkedListTabulatedFunction(xArray, yArray);
+    }
 }

@@ -156,13 +156,26 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
         return xAndYStr;
     }
+
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return this.getClass() == o.getClass() &&
                 Arrays.equals(((ArrayTabulatedFunction) o).xValues, xValues) &&
                 Arrays.equals(((ArrayTabulatedFunction) o).yValues, yValues);
     }
 
+    @Override
+    public int hashCode() {
+        int result = 0;
+        long temp;
+        for (int i = 0; i < count; i++) {
+            temp = Double.doubleToLongBits(xValues[i]);
+            result = (int) (temp ^ (temp >>> 32));
+            temp = Double.doubleToLongBits(yValues[i]);
+            result = 31 * result + (int) (temp ^ (temp >>> 32));
+        }
+        return result;
+    }
 
     @Override
     public Object clone() {

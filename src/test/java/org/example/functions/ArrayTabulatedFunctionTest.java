@@ -117,6 +117,7 @@ class ArrayTabulatedFunctionTest {
         assertEquals("(5.0;2.0) ", arrayTabulatedFunction2.toString());
         assertNotEquals("(0;0)", arrayTabulatedFunction2.toString());
     }
+
     @Test
     void equalsTest() {
         ArrayTabulatedFunction arrayTabulatedFunctionTest = new ArrayTabulatedFunction(xValue, yValue);
@@ -127,5 +128,12 @@ class ArrayTabulatedFunctionTest {
     void cloneTest() {
         Object arrayTabulatedFunctionTest = arrayTabulatedFunction.clone();
         assertTrue(arrayTabulatedFunction.equals(arrayTabulatedFunctionTest));
+    }
+
+    @Test
+    void hashCodeTest() {
+        ArrayTabulatedFunction arrayTabulatedFunction3 = new ArrayTabulatedFunction(xValue, yValue);
+        assertEquals(arrayTabulatedFunction.hashCode(), arrayTabulatedFunction3.hashCode());
+        assertNotEquals(arrayTabulatedFunction.hashCode(), arrayTabulatedFunction2.hashCode());
     }
 }

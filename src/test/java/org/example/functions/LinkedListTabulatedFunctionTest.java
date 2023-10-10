@@ -170,4 +170,19 @@ class LinkedListTabulatedFunctionTest {
 
     }
 
+    @Test
+    void equalsLinkTest() {
+        LinkedListTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(xValue, yValue);
+        boolean bool1 = linkedListTabulatedFunction.equals(linkedListTabulatedFunction3);
+        boolean bool2 = linkedListTabulatedFunction.equals(linkedListTabulatedFunction2);
+        assertTrue(bool1);
+        assertFalse(bool2);
+
+    }
+
+    @Test
+    void cloneLinkTest() {
+        Object linkCopy = linkedListTabulatedFunction.clone();
+        assertTrue(linkedListTabulatedFunction.equals(linkCopy));
+    }
 }

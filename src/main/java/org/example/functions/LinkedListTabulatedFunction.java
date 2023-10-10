@@ -27,7 +27,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         @Override
         public Object clone() {
-            Node cloneNode = new Node(this.x, this.y);
+            Node cloneNode = new Node(x, y);
             cloneNode.prev = this.prev;
             cloneNode.next = this.next;
             return cloneNode;
@@ -35,18 +35,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         @Override
         public boolean equals(Object o) {
-            return (o.getClass() == this.getClass() && ((((Node) o).x == x)
-                    && (((Node) o).y == y)));
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return Double.compare(x, node.x) == 0 && Double.compare(y, node.y) == 0 && Objects.equals(next, node.next) && Objects.equals(prev, node.prev);
         }
 
         @Override
         public int hashCode() {
-            double floatX = (x - (int) x) * 1000;
-            int hashX = 12 * (int) x + 19 * (int) floatX;
-
-            double floatY = (y - (int) y) * 1000;
-            int hashY = 12 * (int) y + 19 * (int) floatY;
-            return hashX + hashY;
+            int result = 31 * Double.hashCode(x);
+            result = 31 * result + Double.hashCode(y);
+            return result;
         }
     }
 
@@ -96,6 +95,20 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         }
 
+    }
+
+    public double[][] arrayLink() {
+        double[] xArray = new double[count];
+        double[] yArray = new double[count];
+        int i = 0;
+        for (Node temp = head; temp != head.prev; temp = temp.next) {
+            xArray[i] = temp.x;
+            yArray[i] = temp.y;
+            i++;
+        }
+        xArray[count - 1] = head.prev.x;
+        yArray[count - 1] = head.prev.y;
+        return new double[][]{xArray, yArray};
     }
 
     public int getCount() {
@@ -261,13 +274,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public int hashCode() {
-        int hashResult = 0;
+        int hashResult = 19;
         for (Node temp = head; temp != head.prev; temp = temp.next) {
 
-            hashResult += temp.hashCode();
+            hashResult = hashResult * 31 + temp.hashCode();
         }
-        hashResult += head.prev.hashCode();
+        hashResult = hashResult * 31 + head.prev.hashCode();
         return hashResult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        LinkedListTabulatedFunction temp = (LinkedListTabulatedFunction) o;
+        double[][] arr1 = temp.arrayLink();
+        double[][] arr2 = this.arrayLink();
+
+
+        if (o.getClass() == this.getClass() && Arrays.deepEquals(arr1, arr2)) {
+            return true;
+        } else return false;
     }
 
     @Override

@@ -17,7 +17,7 @@ class IdentityFunctionTest {
     public void toStringTest() {
         MathFunction identityFunction = new IdentityFunction();
         String str = identityFunction.toString();
-        boolean bool = str.equals("Класс, реализующий интерфейс MathFunction, объекты которого должны выполнять тождественное преобразование");
+        boolean bool = str.equals("IdentityFunction{}");
         assertTrue(bool);
     }
 

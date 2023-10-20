@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     static class Node {
 
         public double x;

@@ -2,7 +2,7 @@ package org.example.functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction, Cloneable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
     private double[] xValues;
     private double[] yValues;
     private int count;

@@ -3,6 +3,7 @@ package org.example.functions;
 import exceptions.InterpolationException;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 
@@ -231,7 +232,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     protected double extrapolateLeft(double x) {
         if (head.next == head) {
             return head.y;
-        } else return (head.y + (((head.prev.y - head.y) / (head.prev.x - head.x)) * (x - head.x)));
+        } else return (head.y + (((head.next.y - head.y) / (head.next.x - head.x)) * (x - head.x)));
     }
 
     protected double extrapolateRight(double x) {
@@ -312,5 +313,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         xArray[count - 1] = head.prev.x;
         yArray[count - 1] = head.prev.y;
         return new LinkedListTabulatedFunction(xArray, yArray);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException("Неподдерживаемая операция");
     }
 }

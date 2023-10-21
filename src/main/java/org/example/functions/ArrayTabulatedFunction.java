@@ -3,6 +3,8 @@ package org.example.functions;
 import exceptions.InterpolationException;
 
 import java.util.Arrays;
+import java.util.Iterator;
+
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
     private double[] xValues;
@@ -180,6 +182,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     public Object clone() {
         return new ArrayTabulatedFunction(xValues.clone(), yValues.clone());
+    }
+
+    @Override
+    public Iterator<Point> iterator()
+    {
+        throw new UnsupportedOperationException("Неподдерживаемая операция");
     }
 }
 

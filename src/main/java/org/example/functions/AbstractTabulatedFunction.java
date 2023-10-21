@@ -28,4 +28,5 @@ abstract class AbstractTabulatedFunction implements TabulatedFunction {
             else throw new ArrayIsNotSortedException("массив не отсортирован");
         }
     }
+
 }

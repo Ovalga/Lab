@@ -1,5 +1,7 @@
 package org.example.functions;
 
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
@@ -100,22 +102,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1) {
-            return yValues[0];
-        } else {
-            double leftX = getX(floorIndex - 1);
-            double rightX = getX(floorIndex);
-            double leftY = getY(floorIndex - 1);
-            double rightY = getY(floorIndex);
-            return interpolate(x, leftX, rightX, leftY, rightY);
-        }
+        if (x < floorIndex && x > floorIndex - 1) {
+            if (count == 1) {
+                return yValues[0];
+            } else {
+                double leftX = getX(floorIndex - 1);
+                double rightX = getX(floorIndex);
+                double leftY = getY(floorIndex - 1);
+                double rightY = getY(floorIndex);
+                return interpolate(x, leftX, rightX, leftY, rightY);
+            }
+        } else throw new InterpolationException("X не лежит в интервале");
 
     }
 
     protected double extrapolateLeft(double x) {
         if (count == 1) return yValues[0];
-        else
-            return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
+        else return (yValues[0] + (((yValues[1] - yValues[0]) / (xValues[1] - xValues[0])) * (x - xValues[0])));
     }
 
     protected double extrapolateRight(double x) {
@@ -126,8 +129,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         if (count == 1) return yValues[0];
-        else
-            return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
+        else return (leftY + (((rightY - leftY) / (rightX - leftX)) * (x - leftX)));
     }
 
     public double apply(double x) {
@@ -159,9 +161,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public boolean equals(Object o) {
-        return this.getClass() == o.getClass() &&
-                Arrays.equals(((ArrayTabulatedFunction) o).xValues, xValues) &&
-                Arrays.equals(((ArrayTabulatedFunction) o).yValues, yValues);
+        return this.getClass() == o.getClass() && Arrays.equals(((ArrayTabulatedFunction) o).xValues, xValues) && Arrays.equals(((ArrayTabulatedFunction) o).yValues, yValues);
     }
 
     @Override

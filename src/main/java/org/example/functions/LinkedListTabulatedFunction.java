@@ -1,5 +1,7 @@
 package org.example.functions;
 
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -212,15 +214,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double interpolate(double x, int floorIndex) {
-        if (head.next == head) {
-            return head.y;
-        } else {
-            double leftX = getX(floorIndex - 1);
-            double rightX = getX(floorIndex);
-            double leftY = getY(floorIndex - 1);
-            double rightY = getY(floorIndex);
-            return interpolate(x, leftX, rightX, leftY, rightY);
-        }
+        if (x < floorIndex && x > floorIndex - 1) {
+            if (head.next == head) {
+                return head.y;
+            } else {
+                double leftX = getX(floorIndex - 1);
+                double rightX = getX(floorIndex);
+                double leftY = getY(floorIndex - 1);
+                double rightY = getY(floorIndex);
+                return interpolate(x, leftX, rightX, leftY, rightY);
+            }
+        } else throw new InterpolationException("X не лежит в интервале");
 
     }
 

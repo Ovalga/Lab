@@ -2,16 +2,17 @@ package org.example.functions;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTabulatedFunctionTest {
 
     double[] xValue = {1, 1.5, 2, 2.5, 3};
     double[] yValue = {2, 3, 4, 5, 6};
-    double[] xValue2 = {5};
-    double[] yValue2 = {2};
+
     LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValue, yValue);
-    LinkedListTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValue2, yValue2);
+
 
     @Test
     void getCount() {
@@ -55,8 +56,7 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(1, linkedListTabulatedFunction.indexOfX(1.5));
         assertNotEquals(0, linkedListTabulatedFunction.indexOfX(1.5));
 
-        assertEquals(-1, linkedListTabulatedFunction.indexOfX(10));
-        assertNotEquals(0, linkedListTabulatedFunction.indexOfX(10));
+
     }
 
     @Test
@@ -64,17 +64,14 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(1, linkedListTabulatedFunction.indexOfY(3));
         assertNotEquals(0, linkedListTabulatedFunction.indexOfY(3));
 
-        assertEquals(-1, linkedListTabulatedFunction.indexOfY(10));
-        assertNotEquals(0, linkedListTabulatedFunction.indexOfY(10));
+
     }
 
     @Test
     void floorIndexOfX() {
-        assertEquals(0, linkedListTabulatedFunction.floorIndexOfX(-5));
-        assertNotEquals(2, linkedListTabulatedFunction.floorIndexOfX(-5));
-
         assertEquals(5, linkedListTabulatedFunction.floorIndexOfX(10));
         assertNotEquals(0, linkedListTabulatedFunction.floorIndexOfX(10));
+
 
         assertEquals(1, linkedListTabulatedFunction.floorIndexOfX(1.5));
         assertNotEquals(0, linkedListTabulatedFunction.floorIndexOfX(1.5));
@@ -88,8 +85,7 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(3.4, linkedListTabulatedFunction.interpolate(1.7, 2));
         assertNotEquals(0, linkedListTabulatedFunction.interpolate(1.7, 2));
 
-        assertEquals(2, linkedListTabulatedFunction2.interpolate(1.7, 1));
-        assertNotEquals(0, linkedListTabulatedFunction2.interpolate(1.7, 1));
+
     }
 
     @Test
@@ -97,8 +93,7 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(-10, linkedListTabulatedFunction.extrapolateLeft(-5));
         assertNotEquals(0, linkedListTabulatedFunction.extrapolateLeft(-5));
 
-        assertEquals(2, linkedListTabulatedFunction2.extrapolateLeft(1));
-        assertNotEquals(0, linkedListTabulatedFunction2.extrapolateLeft(1));
+
     }
 
     @Test
@@ -106,8 +101,7 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(20, linkedListTabulatedFunction.extrapolateRight(10));
         assertNotEquals(0, linkedListTabulatedFunction.extrapolateRight(10));
 
-        assertEquals(2, linkedListTabulatedFunction2.extrapolateRight(1));
-        assertNotEquals(0, linkedListTabulatedFunction2.extrapolateRight(1));
+
     }
 
     @Test
@@ -155,8 +149,7 @@ class LinkedListTabulatedFunctionTest {
         assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", linkedListTabulatedFunction.toString());
         assertNotEquals("(0;0)", linkedListTabulatedFunction.toString());
 
-        assertEquals("(5.0;2.0) ", linkedListTabulatedFunction2.toString());
-        assertNotEquals("(0;0)", linkedListTabulatedFunction2.toString());
+
     }
 
     @Test
@@ -166,7 +159,7 @@ class LinkedListTabulatedFunctionTest {
 
         assertEquals(linkedListTabulatedFunction.hashCode(), linkedListTabulatedFunction3.hashCode());
         assertNotEquals(10, linkedListTabulatedFunction.hashCode());
-        assertNotEquals(linkedListTabulatedFunction3.hashCode(), linkedListTabulatedFunction2.hashCode());
+
 
     }
 
@@ -174,9 +167,9 @@ class LinkedListTabulatedFunctionTest {
     void equalsLinkTest() {
         LinkedListTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(xValue, yValue);
         boolean bool1 = linkedListTabulatedFunction.equals(linkedListTabulatedFunction3);
-        boolean bool2 = linkedListTabulatedFunction.equals(linkedListTabulatedFunction2);
+
         assertTrue(bool1);
-        assertFalse(bool2);
+
 
     }
 
@@ -185,4 +178,111 @@ class LinkedListTabulatedFunctionTest {
         Object linkCopy = linkedListTabulatedFunction.clone();
         assertTrue(linkedListTabulatedFunction.equals(linkCopy));
     }
+
+    @Test
+    void LinkedListTwoTestException() {
+        boolean exceptionThrown = false;
+        double[] xValue2 = {5};
+        double[] yValue2 = {2};
+        try {
+            LinkedListTabulatedFunction linkTabulatedFunction2 = new LinkedListTabulatedFunction(xValue2, yValue2);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void LinkedListFourTestException() {
+        boolean exceptionThrown = false;
+        LogMathFunction log = new LogMathFunction();
+        try {
+            LinkedListTabulatedFunction linkTabulatedFunction3 = new LinkedListTabulatedFunction(log, 0.5, 1, 1);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+
+    @Test
+    void getNodeException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.getNode(10);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void getXException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.getX(10);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void getYException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.getY(-10);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void setYException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.setY(13, 10);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void indexOfXException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.indexOfX(2.21);
+        } catch (NoSuchElementException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void floorIndexOfXException() {
+        boolean exceptionThrown = false;
+
+        try {
+            linkedListTabulatedFunction.floorIndexOfX(-2);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+    }
+
 }

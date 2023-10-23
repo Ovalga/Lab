@@ -5,6 +5,7 @@ import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -273,4 +274,25 @@ class LinkedListTabulatedFunctionTest {
             linkedListTabulatedFunction.interpolate(2.5, 2);
         });
     }
+    @Test
+    void LinkedListIteratorTestException(){
+        Iterator<Point> iterator= linkedListTabulatedFunction.iterator();
+        LinkedListTabulatedFunction.Node node=  linkedListTabulatedFunction.getNode(0);
+        while(iterator.hasNext())
+        {
+            Point point=iterator.next();
+            assertEquals(node.x,point.x);
+            assertEquals(node.y,point.y);
+            node=node.next;
+        }
+        node= linkedListTabulatedFunction.getNode(0);
+        for(Point point: linkedListTabulatedFunction)
+        {
+            assertEquals(node.x,point.x);
+            assertEquals(node.y,point.y);
+            node=node.next;
+        }
+
+    }
+
 }

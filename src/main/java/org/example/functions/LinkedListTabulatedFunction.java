@@ -76,7 +76,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Длина меньше минимальной");
         } else {
-            checkLengthIsTheSame(xValues,yValues);
+            checkLengthIsTheSame(xValues, yValues);
             checkSorted(xValues);
             for (int i = 0; i < xValues.length; ++i) {
                 addNode(xValues[i], yValues[i]);
@@ -138,7 +138,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     Node getNode(int index) {
-        if (index < 0 ||index > count - 1) {
+        if (index < 0 || index > count - 1) {
             throw new IllegalArgumentException("Индекс не пренадлежит нужному промежутку");
         } else {
             if (index == 0) {
@@ -223,8 +223,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         int index = 0;
         if (head.x > x) {
             throw new IllegalArgumentException("Число лежит за левой границей");
-        }
-        else if (head.prev.x < x) return count;
+        } else if (head.prev.x < x) return count;
         else {
             for (Node temp = head; ; temp = temp.next) {
                 if (temp.x == x) {
@@ -338,6 +337,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException("Неподдерживаемая операция");
+        return new Iterator<Point>() {
+            private Node curNode=head;
+            @Override
+            public boolean hasNext() {
+                return ((curNode.next!=head)&&(curNode.next!=null));
+            }
+
+            @Override
+            public Point next() {
+                if(hasNext()){
+                    Point point=new Point(curNode.x,curNode.y);
+                    curNode=curNode.next;
+                    return point;
+                }
+                else throw new NoSuchElementException();
+            }
+        };
     }
+
 }

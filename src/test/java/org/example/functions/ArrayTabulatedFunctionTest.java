@@ -225,10 +225,10 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void ArrayTabulatedFunctionSortedException() {
-        double[] xValue2 = {2, 3, 4, 17, 3, 45, 0};
-        double[] yValue2 = {2, 34, 5, 56, 7, 6, 5};
+        double[] xValue5 = {2, 3, 4, 17, 3, 45, 0};
+        double[] yValue5= {2, 34, 5, 56, 7, 6, 5};
         assertThrows(ArrayIsNotSortedException.class, () -> {
-            ArrayTabulatedFunction arrTabulatedFunction25 = new ArrayTabulatedFunction(xValue2, yValue2);
+            ArrayTabulatedFunction arrTabulatedFunction25 = new ArrayTabulatedFunction(xValue5, yValue5);
         });
     }
 

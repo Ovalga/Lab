@@ -13,9 +13,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length < 2) {
+        if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина меньше минимальной");
         } else {
+            checkLengthIsTheSame(xValues,yValues);
+            checkSorted(xValues);
             this.xValues = Arrays.copyOf(xValues, xValues.length);
             this.yValues = Arrays.copyOf(yValues, yValues.length);
             this.count = xValues.length;
@@ -128,11 +130,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     protected double interpolate(double x, int floorIndex) {
         if (x < floorIndex && x > floorIndex - 1) {
 
-                double leftX = getX(floorIndex - 1);
-                double rightX = getX(floorIndex);
-                double leftY = getY(floorIndex - 1);
-                double rightY = getY(floorIndex);
-                return interpolate(x, leftX, rightX, leftY, rightY);
+            double leftX = getX(floorIndex - 1);
+            double rightX = getX(floorIndex);
+            double leftY = getY(floorIndex - 1);
+            double rightY = getY(floorIndex);
+            return interpolate(x, leftX, rightX, leftY, rightY);
 
         } else throw new InterpolationException("X не лежит в интервале");
 

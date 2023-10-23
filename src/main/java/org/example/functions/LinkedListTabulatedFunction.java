@@ -76,6 +76,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Длина меньше минимальной");
         } else {
+            checkLengthIsTheSame(xValues,yValues);
+            checkSorted(xValues);
             for (int i = 0; i < xValues.length; ++i) {
                 addNode(xValues[i], yValues[i]);
             }

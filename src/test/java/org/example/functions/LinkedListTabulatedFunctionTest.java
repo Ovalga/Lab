@@ -1,5 +1,8 @@
 package org.example.functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -234,21 +237,40 @@ class LinkedListTabulatedFunctionTest {
 
     @Test
     void indexOfXException() {
-
         assertThrows(NoSuchElementException.class, () -> {
             linkedListTabulatedFunction.indexOfX(2.21);
         });
-
     }
 
     @Test
     void floorIndexOfXException() {
-
-
         assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.floorIndexOfX(-2);
         });
+    }
 
+    @Test
+    void LinkedListTabulatedFunctionLengthException() {
+        double[] xValue2 = {5, 6, 5};
+        double[] yValue2 = {2, 6, 7, 95};
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            LinkedListTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValue2, yValue2);
+        });
+    }
 
+    @Test
+    void LinkedListTabulatedFunctionSortedException() {
+        double[] xValue2 = {2, 3, 4, 17, 3, 45, 0};
+        double[] yValue2 = {2, 34, 5, 56, 7, 6, 5};
+        assertThrows(ArrayIsNotSortedException.class, () -> {
+            LinkedListTabulatedFunction linkedListTabulatedFunction25 = new LinkedListTabulatedFunction(xValue2, yValue2);
+        });
+    }
+
+    @Test
+    void LinkedListInterpolateTestException() {
+        assertThrows(InterpolationException.class, () -> {
+            linkedListTabulatedFunction.interpolate(2.5, 2);
+        });
     }
 }

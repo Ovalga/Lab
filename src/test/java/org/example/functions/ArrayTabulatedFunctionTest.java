@@ -1,5 +1,8 @@
 package org.example.functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -99,16 +102,12 @@ class ArrayTabulatedFunctionTest {
     void extrapolateRight() {
         assertEquals(20, arrayTabulatedFunction.extrapolateRight(10));
         assertNotEquals(0, arrayTabulatedFunction.extrapolateRight(10));
-
-
     }
 
     @Test
     void toStringTest() {
         assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", arrayTabulatedFunction.toString());
         assertNotEquals("(0;0)", arrayTabulatedFunction.toString());
-
-
     }
 
     @Test
@@ -127,25 +126,31 @@ class ArrayTabulatedFunctionTest {
     void hashCodeTest() {
         ArrayTabulatedFunction arrayTabulatedFunction3 = new ArrayTabulatedFunction(xValue, yValue);
         assertEquals(arrayTabulatedFunction.hashCode(), arrayTabulatedFunction3.hashCode());
-
     }
 
     @Test
     void ArrayTwoTestException() {
+        boolean exceptionThrown = false;
         double[] xValue2 = {5};
         double[] yValue2 = {2};
-        assertThrows(IllegalArgumentException.class, () -> {
+        try {
             ArrayTabulatedFunction arrTabulatedFunction2 = new ArrayTabulatedFunction(xValue2, yValue2);
-        });
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
     void ArrayFourTestException() {
-
+        boolean exceptionThrown = false;
         LogMathFunction log = new LogMathFunction();
-        assertThrows(IllegalArgumentException.class, () -> {
-            ArrayTabulatedFunction arrTabulatedFunction3 = new ArrayTabulatedFunction(log, 0.5, 1, 1);
-        });
+        try {
+            ArrayTabulatedFunction arrkTabulatedFunction3 = new ArrayTabulatedFunction(log, 0.5, 1, 1);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
 
@@ -153,37 +158,84 @@ class ArrayTabulatedFunctionTest {
     void getXException() {
         boolean exceptionThrown = false;
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        try {
             arrayTabulatedFunction.getX(10);
-
-        });
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
     void getYException() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        boolean exceptionThrown = false;
+
+        try {
             arrayTabulatedFunction.getY(-10);
-        });
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
     void setYException() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        boolean exceptionThrown = false;
+
+        try {
             arrayTabulatedFunction.setY(13, 10);
-        });
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
     void indexOfXException() {
-        assertThrows(NoSuchElementException.class, () -> {
+        boolean exceptionThrown = false;
+
+        try {
             arrayTabulatedFunction.indexOfX(2.21);
-        });
+        } catch (NoSuchElementException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
     void floorIndexOfXException() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        boolean exceptionThrown = false;
+
+        try {
             arrayTabulatedFunction.floorIndexOfX(-2);
+        } catch (IllegalArgumentException exception) {
+            exceptionThrown = true;
+        }
+        assertTrue(exceptionThrown);
+    }
+
+    @Test
+    void ArrayTabulatedFunctionLengthException() {
+        double[] xValue2 = {5, 6, 5};
+        double[] yValue2 = {2, 6, 7, 95};
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            ArrayTabulatedFunction arrTabulatedFunction2 = new ArrayTabulatedFunction(xValue2, yValue2);
+        });
+    }
+
+    @Test
+    void ArrayTabulatedFunctionSortedException() {
+        double[] xValue2 = {2, 3, 4, 17, 3, 45, 0};
+        double[] yValue2 = {2, 34, 5, 56, 7, 6, 5};
+        assertThrows(ArrayIsNotSortedException.class, () -> {
+            ArrayTabulatedFunction arrTabulatedFunction25 = new ArrayTabulatedFunction(xValue2, yValue2);
+        });
+    }
+
+    @Test
+    void interpolateTestException() {
+        assertThrows(InterpolationException.class, () -> {
+            arrayTabulatedFunction.interpolate(2.5, 2);
         });
     }
 

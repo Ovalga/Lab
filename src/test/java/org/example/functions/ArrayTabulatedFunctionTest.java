@@ -129,99 +129,62 @@ class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction.hashCode(), arrayTabulatedFunction3.hashCode());
 
     }
+
     @Test
     void ArrayTwoTestException() {
-        boolean exceptionThrown = false;
         double[] xValue2 = {5};
         double[] yValue2 = {2};
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             ArrayTabulatedFunction arrTabulatedFunction2 = new ArrayTabulatedFunction(xValue2, yValue2);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void ArrayFourTestException() {
-        boolean exceptionThrown = false;
+
         LogMathFunction log = new LogMathFunction();
-        try {
-            ArrayTabulatedFunction arrkTabulatedFunction3 = new ArrayTabulatedFunction(log, 0.5, 1, 1);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ArrayTabulatedFunction arrTabulatedFunction3 = new ArrayTabulatedFunction(log, 0.5, 1, 1);
+        });
     }
-
-
 
 
     @Test
     void getXException() {
         boolean exceptionThrown = false;
 
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             arrayTabulatedFunction.getX(10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
 
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void getYException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             arrayTabulatedFunction.getY(-10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void setYException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             arrayTabulatedFunction.setY(13, 10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void indexOfXException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(NoSuchElementException.class, () -> {
             arrayTabulatedFunction.indexOfX(2.21);
-        } catch (NoSuchElementException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void floorIndexOfXException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             arrayTabulatedFunction.floorIndexOfX(-2);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
 }

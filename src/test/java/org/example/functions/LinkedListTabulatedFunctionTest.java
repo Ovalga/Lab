@@ -181,108 +181,74 @@ class LinkedListTabulatedFunctionTest {
 
     @Test
     void LinkedListTwoTestException() {
-        boolean exceptionThrown = false;
         double[] xValue2 = {5};
         double[] yValue2 = {2};
-        try {
-            LinkedListTabulatedFunction linkTabulatedFunction2 = new LinkedListTabulatedFunction(xValue2, yValue2);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
+        assertThrows(IllegalArgumentException.class, () -> {
+            LinkedListTabulatedFunction link = new LinkedListTabulatedFunction(xValue2, yValue2);
+        });
 
-        assertTrue(exceptionThrown);
     }
 
     @Test
     void LinkedListFourTestException() {
-        boolean exceptionThrown = false;
-        LogMathFunction log = new LogMathFunction();
-        try {
-            LinkedListTabulatedFunction linkTabulatedFunction3 = new LinkedListTabulatedFunction(log, 0.5, 1, 1);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
 
-        assertTrue(exceptionThrown);
+        LogMathFunction log = new LogMathFunction();
+        assertThrows(IllegalArgumentException.class, () -> {
+            LinkedListTabulatedFunction linkTabulatedFunction3 = new LinkedListTabulatedFunction(log, 0.5, 1, 1);
+        });
     }
 
 
     @Test
     void getNodeException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.getNode(10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
+        });
 
-        assertTrue(exceptionThrown);
     }
 
     @Test
     void getXException() {
-        boolean exceptionThrown = false;
 
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.getX(10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
+        });
 
-        assertTrue(exceptionThrown);
     }
 
     @Test
     void getYException() {
-        boolean exceptionThrown = false;
 
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.getY(-10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
-
-        assertTrue(exceptionThrown);
+        });
     }
 
     @Test
     void setYException() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.setY(13, 10);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
+        });
 
-        assertTrue(exceptionThrown);
     }
 
     @Test
     void indexOfXException() {
-        boolean exceptionThrown = false;
 
-        try {
+        assertThrows(NoSuchElementException.class, () -> {
             linkedListTabulatedFunction.indexOfX(2.21);
-        } catch (NoSuchElementException exception) {
-            exceptionThrown = true;
-        }
+        });
 
-        assertTrue(exceptionThrown);
     }
 
     @Test
     void floorIndexOfXException() {
-        boolean exceptionThrown = false;
 
-        try {
+
+        assertThrows(IllegalArgumentException.class, () -> {
             linkedListTabulatedFunction.floorIndexOfX(-2);
-        } catch (IllegalArgumentException exception) {
-            exceptionThrown = true;
-        }
+        });
 
-        assertTrue(exceptionThrown);
+
     }
-
 }

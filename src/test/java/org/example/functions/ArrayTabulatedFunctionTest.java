@@ -5,6 +5,7 @@ import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -226,7 +227,7 @@ class ArrayTabulatedFunctionTest {
     @Test
     void ArrayTabulatedFunctionSortedException() {
         double[] xValue5 = {2, 3, 4, 17, 3, 45, 0};
-        double[] yValue5= {2, 34, 5, 56, 7, 6, 5};
+        double[] yValue5 = {2, 34, 5, 56, 7, 6, 5};
         assertThrows(ArrayIsNotSortedException.class, () -> {
             ArrayTabulatedFunction arrTabulatedFunction25 = new ArrayTabulatedFunction(xValue5, yValue5);
         });
@@ -237,6 +238,25 @@ class ArrayTabulatedFunctionTest {
         assertThrows(InterpolationException.class, () -> {
             arrayTabulatedFunction.interpolate(2.5, 2);
         });
+    }
+
+    @Test
+    void arrayTabulatedIteratorTestException() {
+        Iterator<Point> iterator = arrayTabulatedFunction.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(xValue[i], point.x);
+            assertEquals(yValue[i], point.y);
+            ++i;
+        }
+        i = 0;
+        for (Point point : arrayTabulatedFunction) {
+            assertEquals(xValue[i], point.x);
+            assertEquals(yValue[i], point.y);
+            ++i;
+        }
+
     }
 
 }

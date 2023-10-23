@@ -16,7 +16,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Длина меньше минимальной");
         } else {
-            checkLengthIsTheSame(xValues,yValues);
+            checkLengthIsTheSame(xValues, yValues);
             checkSorted(xValues);
             this.xValues = Arrays.copyOf(xValues, xValues.length);
             this.yValues = Arrays.copyOf(yValues, yValues.length);
@@ -208,7 +208,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException("Неподдерживаемая операция");
+        return new Iterator<Point>() {
+            private int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return (i < count);
+            }
+
+            @Override
+            public Point next() {
+                if (hasNext()) {
+                    Point point = new Point(xValues[i], yValues[i]);
+                    ++i;
+                    return point;
+                } else throw new NoSuchElementException();
+            }
+        };
     }
 }
 

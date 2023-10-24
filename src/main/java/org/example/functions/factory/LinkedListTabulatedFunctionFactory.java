@@ -1,4 +1,10 @@
 package org.example.functions.factory;
 
-public class LinkedListTabulatedFunctionFactory {
+import org.example.functions.LinkedListTabulatedFunction;
+import org.example.functions.TabulatedFunction;
+
+public class LinkedListTabulatedFunctionFactory implements TabulatedFunctionFactory {
+    public TabulatedFunction create(double[] xValues, double[] yValues) {
+        return new LinkedListTabulatedFunction(xValues, yValues);
+    }
 }

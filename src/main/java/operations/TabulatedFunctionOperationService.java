@@ -7,9 +7,7 @@ import org.example.functions.factory.ArrayTabulatedFunctionFactory;
 import org.example.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedFunctionOperationService {
-    private interface BiOperation {
-        double apply(double u, double v);
-    }
+
 
     protected TabulatedFunctionFactory factory;
 
@@ -30,11 +28,12 @@ public class TabulatedFunctionOperationService {
     }
 
     public static Point[] asPoints(TabulatedFunction tabulatedFunction) {
-        int i = 0;
+
         Point[] asPointsArray = new Point[tabulatedFunction.getCount()];
+        int i = 0;
         for (Point point : tabulatedFunction) {
             asPointsArray[i] = point;
-            i++;
+            ++i;
         }
         return asPointsArray;
     }
@@ -67,5 +66,18 @@ public class TabulatedFunctionOperationService {
     public TabulatedFunction subtraction(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
         BiOperation operation = (u, v) -> u - v;
         return doOperation(firstFunction, secondFunction, operation);
+    }
+
+    public TabulatedFunction multiplication(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u * v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
+
+    public TabulatedFunction division(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u / v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
+    private interface BiOperation {
+        double apply(double u, double v);
     }
 }

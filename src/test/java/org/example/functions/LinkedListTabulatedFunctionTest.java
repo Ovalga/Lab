@@ -274,25 +274,28 @@ class LinkedListTabulatedFunctionTest {
             linkedListTabulatedFunction.interpolate(2.5, 2);
         });
     }
+
     @Test
-    void LinkedListIteratorTestException(){
-        Iterator<Point> iterator= linkedListTabulatedFunction.iterator();
-        LinkedListTabulatedFunction.Node node=  linkedListTabulatedFunction.getNode(0);
-        while(iterator.hasNext())
-        {
-            Point point=iterator.next();
-            assertEquals(node.x,point.x);
-            assertEquals(node.y,point.y);
-            node=node.next;
+    void LinkedListIteratorTestException() {
+        Iterator<Point> iterator = linkedListTabulatedFunction.iterator();
+        LinkedListTabulatedFunction.Node node = linkedListTabulatedFunction.getNode(0);
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(node.x, point.x);
+            assertEquals(node.y, point.y);
+            node = node.next;
         }
-        node= linkedListTabulatedFunction.getNode(0);
-        for(Point point: linkedListTabulatedFunction)
-        {
-            assertEquals(node.x,point.x);
-            assertEquals(node.y,point.y);
-            node=node.next;
+        node = linkedListTabulatedFunction.getNode(0);
+        for (Point point : linkedListTabulatedFunction) {
+            assertEquals(node.x, point.x);
+            assertEquals(node.y, point.y);
+            node = node.next;
         }
 
     }
 
+    @Test
+    void toStringBuilderLinkTest() {
+        assertEquals(linkedListTabulatedFunction.toString(), "LinkedListTabulatedFunction size = 5\n[1.0; 2.0]\n[1.5; 3.0]\n[2.0; 4.0]\n[2.5; 5.0]\n[3.0; 6.0]\n");
+    }
 }

@@ -3,6 +3,8 @@ package org.example.functions;
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 
+import java.util.Iterator;
+
 abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected abstract int floorIndexOfX(double x);
 
@@ -28,4 +30,27 @@ abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.getClass().getSimpleName());
+        builder.append(" size = ");
+        builder.append(this.getCount());
+        builder.append("\n");
+        for (Point point : this
+        ) {
+            builder.append("[");
+            builder.append(point.x);
+            builder.append("; ");
+            builder.append(point.y);
+            builder.append("]\n");
+
+
+        }
+
+        return builder.toString();
+    }
+
 }
+

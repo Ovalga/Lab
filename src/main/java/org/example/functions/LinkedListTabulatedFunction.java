@@ -284,7 +284,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         String xAndYStr = "";
         for (Node temp = head; temp != head.prev; temp = temp.next) {
@@ -294,7 +294,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         xAndYStr += "(" + String.valueOf(head.prev.x) + ";" + String.valueOf(head.prev.y) + ")" + " ";
         return xAndYStr;
-    }
+    }*/
 
 
     @Override
@@ -338,8 +338,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
-            private Node curNode=head;
+            private Node curNode = head;
             private int tempCount = 0;
+
             @Override
             public boolean hasNext() {
                 return tempCount < getCount();
@@ -350,8 +351,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 if (!hasNext()) {
                     throw new NoSuchElementException("Elements not found...");
                 }
-                Point point=new Point(curNode.x,curNode.y);
-                curNode=curNode.next;
+                Point point = new Point(curNode.x, curNode.y);
+                curNode = curNode.next;
                 this.tempCount++;
                 return point;
             }

@@ -98,9 +98,9 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     void divisionTest() {
-        TabulatedFunction result1 = operation1.division(func2, func1);
+        TabulatedFunction result1 = operation1.division(func1, func2);
         for (int i = 0; i < result1.getCount(); i++) {
-            assertEquals(yValue2[i] / yValue1[i], result1.getY(i));
+            assertEquals(yValue1[i] / yValue2[i], result1.getY(i));
         }
 
         TabulatedFunction result2 = operation2.division(func4, func3);

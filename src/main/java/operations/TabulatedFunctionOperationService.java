@@ -64,7 +64,9 @@ public class TabulatedFunctionOperationService {
     }
 
     public TabulatedFunction subtraction(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
-        BiOperation operation = (u, v) -> u - v;
+        BiOperation operation = (u, v) ->
+
+                u - v;
         return doOperation(firstFunction, secondFunction, operation);
     }
 

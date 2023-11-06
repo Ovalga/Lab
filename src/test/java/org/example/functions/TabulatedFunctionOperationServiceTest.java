@@ -48,7 +48,7 @@ public class TabulatedFunctionOperationServiceTest {
         }
 
 
-        TabulatedFunction result3 = operation2.add(func1, func3);
+        TabulatedFunction result3 = operation2.add(func1, func4);
         for (int i = 0; i < result3.getCount(); i++) {
             assertEquals(yValue1[i] + yValue2[i], result3.getY(i));
         }
@@ -65,11 +65,11 @@ public class TabulatedFunctionOperationServiceTest {
 
         TabulatedFunction result2 = operation2.subtraction(func4, func3);
         for (int i = 0; i < result2.getCount(); i++) {
-            assertEquals(yValue1[i] - yValue2[i], result2.getY(i));
+            assertEquals(yValue2[i] - yValue1[i], result2.getY(i));
         }
 
 
-        TabulatedFunction result3 = operation2.subtraction(func1, func3);
+        TabulatedFunction result3 = operation2.subtraction(func1, func4);
         for (int i = 0; i < result3.getCount(); i++) {
             assertEquals(yValue1[i] - yValue2[i], result3.getY(i));
         }
@@ -77,18 +77,18 @@ public class TabulatedFunctionOperationServiceTest {
     @Test
     void multiplicationTest() {
 
-        TabulatedFunction result1 = operation1.add(func1, func2);
+        TabulatedFunction result1 = operation1.multiplication(func1, func2);
         for (int i = 0; i < result1.getCount(); i++) {
             assertEquals(yValue1[i] * yValue2[i], result1.getY(i));
         }
 
-        TabulatedFunction result2 = operation2.add(func3, func4);
+        TabulatedFunction result2 = operation2.multiplication(func3, func4);
         for (int i = 0; i < result2.getCount(); i++) {
             assertEquals(yValue1[i] * yValue2[i], result2.getY(i));
         }
 
 
-        TabulatedFunction result3 = operation2.add(func1, func3);
+        TabulatedFunction result3 = operation2.multiplication(func1, func4);
         for (int i = 0; i < result3.getCount(); i++) {
             assertEquals(yValue1[i] * yValue2[i], result3.getY(i));
         }
@@ -98,18 +98,18 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     void divisionTest() {
-        TabulatedFunction result1 = operation1.subtraction(func1, func2);
+        TabulatedFunction result1 = operation1.division(func2, func1);
         for (int i = 0; i < result1.getCount(); i++) {
-            assertEquals(yValue1[i] / yValue2[i], result1.getY(i));
+            assertEquals(yValue2[i] / yValue1[i], result1.getY(i));
         }
 
-        TabulatedFunction result2 = operation2.subtraction(func4, func3);
+        TabulatedFunction result2 = operation2.division(func4, func3);
         for (int i = 0; i < result2.getCount(); i++) {
-            assertEquals(yValue1[i] / yValue2[i], result2.getY(i));
+            assertEquals(yValue2[i] / yValue1[i], result2.getY(i));
         }
 
 
-        TabulatedFunction result3 = operation2.subtraction(func1, func3);
+        TabulatedFunction result3 = operation2.division(func1, func4);
         for (int i = 0; i < result3.getCount(); i++) {
             assertEquals(yValue1[i] /yValue2[i], result3.getY(i));
         }

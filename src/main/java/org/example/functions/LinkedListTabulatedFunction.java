@@ -339,19 +339,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
             private Node curNode=head;
+            private int tempCount = 0;
             @Override
             public boolean hasNext() {
-                return ((curNode.next!=head)&&(curNode.next!=null));
+                return tempCount < getCount();
             }
 
             @Override
             public Point next() {
-                if(hasNext()){
-                    Point point=new Point(curNode.x,curNode.y);
-                    curNode=curNode.next;
-                    return point;
+                if (!hasNext()) {
+                    throw new NoSuchElementException("Elements not found...");
                 }
-                else throw new NoSuchElementException();
+                Point point=new Point(curNode.x,curNode.y);
+                curNode=curNode.next;
+                this.tempCount++;
+                return point;
             }
         };
     }

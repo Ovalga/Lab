@@ -17,6 +17,5 @@ public class LinkedListTabulatedFunctionFactoryTest {
         double[] yValueFactory = {5, 6, 7, 8};
         boolean flag = listTabulatedFunction.getClass() == (listFactory.create(xValueFactory, yValueFactory)).getClass();
         assertTrue(flag);
-
     }
 }

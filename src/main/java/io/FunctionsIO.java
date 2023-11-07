@@ -2,6 +2,7 @@ package io;
 
 import org.example.functions.Point;
 import org.example.functions.TabulatedFunction;
+ import org.example.functions.factory.TabulatedFunctionFactory;
 
 import java.io.*;
 
@@ -28,4 +29,18 @@ final class FunctionsIO {
         }
         printWriter.flush();
     }
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream,TabulatedFunctionFactory factory)throws IOException{
+
+        DataInputStream in = new DataInputStream(inputStream);
+        int length=in.readInt();
+        double[] xValue=new double[length];
+        double[] yValue=new double[length];
+        for(int i=0;i<length;i++)
+        {
+            xValue[i]=in.readDouble();
+            yValue[i]=in.readDouble();
+        }
+        return factory.create(xValue,yValue);
+    }
+
 }

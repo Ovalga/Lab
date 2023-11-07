@@ -20,8 +20,8 @@ public class TabulatedFunctionFileWriter {
                 TabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValue, yValue);
                 TabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValue,yValue);
 
-                FunctionsIO.writeTabulatedFunction(writerArray,arrayTabulatedFunction);
-                FunctionsIO.writeTabulatedFunction(writerLinked,linkedListTabulatedFunction);
+                io.FunctionsIO.writeTabulatedFunction(writerArray,arrayTabulatedFunction);
+                io.FunctionsIO.writeTabulatedFunction(writerLinked,linkedListTabulatedFunction);
             }
         } catch (IOException e) {
             e.printStackTrace();

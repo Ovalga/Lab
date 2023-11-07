@@ -2,9 +2,13 @@ package io;
 
 import org.example.functions.Point;
 import org.example.functions.TabulatedFunction;
- import org.example.functions.factory.TabulatedFunctionFactory;
+import org.example.functions.factory.TabulatedFunctionFactory;
 
+import javax.swing.text.NumberFormatter;
 import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 final class FunctionsIO {
     private FunctionsIO() {
@@ -29,18 +33,38 @@ final class FunctionsIO {
         }
         printWriter.flush();
     }
-    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream,TabulatedFunctionFactory factory)throws IOException{
+
+    static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+        int length = Integer.parseInt(reader.readLine());
+        double[] xValue = new double[length];
+        double[] yValue = new double[length];
+        NumberFormat numberFormatter;
+        numberFormatter = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+
+        for (int i = 0; i < length; i++) {
+            String[] pointsHalf = reader.readLine().split(" ");
+
+            try {
+                xValue[i] = numberFormatter.parse(pointsHalf[0]).doubleValue();
+                yValue[i] = numberFormatter.parse(pointsHalf[1]).doubleValue();
+            } catch (ParseException e) {
+                throw new IOException(e);
+            }
+        }
+        return factory.create(xValue, yValue);
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
 
         DataInputStream in = new DataInputStream(inputStream);
-        int length=in.readInt();
-        double[] xValue=new double[length];
-        double[] yValue=new double[length];
-        for(int i=0;i<length;i++)
-        {
-            xValue[i]=in.readDouble();
-            yValue[i]=in.readDouble();
+        int length = in.readInt();
+        double[] xValue = new double[length];
+        double[] yValue = new double[length];
+        for (int i = 0; i < length; i++) {
+            xValue[i] = in.readDouble();
+            yValue[i] = in.readDouble();
         }
-        return factory.create(xValue,yValue);
+        return factory.create(xValue, yValue);
     }
 
 }

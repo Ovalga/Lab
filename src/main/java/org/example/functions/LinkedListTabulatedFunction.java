@@ -2,14 +2,15 @@ package org.example.functions;
 
 import exceptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
-    static class Node {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    static class Node implements Serializable{
 
         public double x;
         public double y;
@@ -52,7 +53,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             return result;
         }
     }
-
+private static final long serialVersionUID= 7220188290540506787L;
     private int count;
     private Node head;
 

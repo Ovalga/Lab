@@ -1,0 +1,30 @@
+package io;
+
+import org.example.functions.ArrayTabulatedFunction;
+import org.example.functions.LinkedListTabulatedFunction;
+import org.example.functions.TabulatedFunction;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class TabulatedFunctionFileWriter {
+    public static void main(String[] args) {
+        try {
+            try (BufferedWriter writerArray = new BufferedWriter(new FileWriter("output/array function.txt"));
+                 BufferedWriter writerLinked = new BufferedWriter(new FileWriter("output/linked list function.txt"))) {
+
+                double[] xValue = {1, 1.5, 2, 2.5, 3};
+                double[] yValue = {2, 3, 4, 5, 6};
+                TabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValue, yValue);
+                TabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValue,yValue);
+
+                FunctionsIO.writeTabulatedFunction(writerArray,arrayTabulatedFunction);
+                FunctionsIO.writeTabulatedFunction(writerLinked,linkedListTabulatedFunction);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,6 +1,10 @@
 import concurrent.SynchronizedTabulatedFunction;
 import org.example.functions.ArrayTabulatedFunction;
+import org.example.functions.LinkedListTabulatedFunction;
+import org.example.functions.Point;
 import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -64,6 +68,18 @@ SynchronizedTabulatedFunction synchronizedTabulatedFunction=new SynchronizedTabu
 
     }
 
-   
+    @Test
+    void arrayTabulatedIteratorTestException() {
+        Iterator<Point> iterator = synchronizedTabulatedFunction.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(xValue[i], point.x);
+            assertEquals(yValue[i], point.y);
+            ++i;
+        }
 
-}
+    }
+
+
+    }

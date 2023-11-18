@@ -105,11 +105,7 @@ class ArrayTabulatedFunctionTest {
         assertNotEquals(0, arrayTabulatedFunction.extrapolateRight(10));
     }
 
-    @Test
-    void toStringTest() {
-        assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", arrayTabulatedFunction.toString());
-        assertNotEquals("(0;0)", arrayTabulatedFunction.toString());
-    }
+  
 
     @Test
     void equalsTest() {

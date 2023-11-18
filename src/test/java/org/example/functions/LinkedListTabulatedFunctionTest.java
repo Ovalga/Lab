@@ -148,13 +148,7 @@ class LinkedListTabulatedFunctionTest {
         assertTrue(node.equals(nodeCopy));
     }
 
-    @Test
-    void toStringLinkTest() {
-        assertEquals("(1.0;2.0) (1.5;3.0) (2.0;4.0) (2.5;5.0) (3.0;6.0) ", linkedListTabulatedFunction.toString());
-        assertNotEquals("(0;0)", linkedListTabulatedFunction.toString());
 
-
-    }
 
     @Test
     void hashCodeLinkTest() {

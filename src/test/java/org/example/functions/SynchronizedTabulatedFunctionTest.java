@@ -81,5 +81,17 @@ SynchronizedTabulatedFunction synchronizedTabulatedFunction=new SynchronizedTabu
 
     }
 
+    @Test
+    public void doSynchronously() {
+        SynchronizedTabulatedFunction.Operation<Double> operation = func -> {
+            double sum = 0;
+            for (Point el : synchronizedTabulatedFunction)
+                sum += el.y;
+            return sum;
+        };
+        double sumOfY = synchronizedTabulatedFunction.doSynchronously(operation);
+        assertEquals(20, sumOfY);
+    }
+
 
     }

@@ -1,5 +1,6 @@
 package operations;
 
+import concurrent.SynchronizedTabulatedFunction;
 import org.example.functions.Point;
 import org.example.functions.TabulatedFunction;
 import org.example.functions.factory.ArrayTabulatedFunctionFactory;
@@ -32,7 +33,7 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         double[] xValue = new double[function.getCount()];
         double[] yValue = new double[function.getCount()];
         int i = 0;
-        while (i < (xValue.length-1)) {
+        while (i < (xValue.length - 1)) {
             xValue[i] = arrayOfPoints[i].x;
             yValue[i] = (arrayOfPoints[i + 1].y - arrayOfPoints[i].y) / (arrayOfPoints[i + 1].x - arrayOfPoints[i].x);
             i++;
@@ -42,4 +43,15 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         return factory.create(xValue, yValue);
 
     }
+
+
+        public SynchronizedTabulatedFunction deriveSynchronously (TabulatedFunction function){
+            SynchronizedTabulatedFunction synchronizedFunction = (function instanceof SynchronizedTabulatedFunction) ?
+                    (SynchronizedTabulatedFunction) function :
+                    new SynchronizedTabulatedFunction(function);
+
+            return synchronizedFunction.doSynchronously(func -> new SynchronizedTabulatedFunction(derive(func)));
+        }
+
+
 }

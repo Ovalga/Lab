@@ -15,6 +15,7 @@ public class ReadTask implements Runnable {
         for (int i = 0; i < tabulatedFunction.getCount(); i++) {
             String str = String.format("i=%d, x=%f, y=%f", i, tabulatedFunction.getX(i), tabulatedFunction.getY(i));
             System.out.println(str);
+
         }
     }
 

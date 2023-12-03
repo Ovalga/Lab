@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаба 7</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+</head>
+<body>
+
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: rgb(186, 215, 234);
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+
+
+        <div class="container" style="padding-top: 200px;">
+
+            <div class="d-grid gap-2">
+
+                <button type="button" class=" button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal1').style.display='flex'">Настройки </button>
+
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal2').style.display='flex'">Создать TabulatedFunction </button>
+
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal4').style.display='flex'">Операции с функциями</button>
+
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal5').style.display='flex'">Дифферинцирование функции</button>
+            </div>
+        </div>
+
+        
+
+        <div id="modal1" class="modal">
+            <div class="modal-content" style="width: 700px;">
+                <span onclick="document.getElementById('modal1').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+                <p>
+                <form>
+                    <input type="radio" id="Array" name="fav" value="ArrayTabulatedFunction" checked>
+                    <label for="Array">ArrayTabulatedFunction</label><br>
+                    <input type="radio" id="Linked" name="fav" value="LinkedListTabulatedFunction">
+                    <label for="Linked">LinkedListTabulatedFunction</label><br>
+
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <div id="modal4" class="modal">
+            <div class="modal-content" style="width: 1000px;">
+                <span onclick="document.getElementById('modal4').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+                <p>
+                <form id="form">
+                    <label for="functionOption">Выберите операцию:</label>
+                    <select id="functionOption" name="function">
+                        <option value="Sum">Сложение</option>
+                        <option value="deduction">Вычетание</option>
+                        <option value="multiplication">Умножение</option>
+                        <option value="division">Деление</option>
+                    </select><br>
+
+                    <h6>Первый операнд</h6>
+                    <table class="table" id="">
+                        <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+
+                    <button type="button"  class="button button-blue btn btn-primary" onclick="document.getElementById('modal2').style.display='flex'">Cоздать
+                        TabulatedFunction</button>
+
+                    <button type="button"  class="button button-blue btn btn-primary"
+                        onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+                        <button type="button"  class="button button-blue btn btn-primary"
+                        onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+
+                    <h6>Второй операнд</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+
+                    <button type="button"  class="button button-blue btn btn-primary" onclick="document.getElementById('modal2').style.display='flex'">Cоздать
+                        TabulatedFunction</button>
+
+                    <button type="button"  class="button button-blue btn btn-primary"
+                        onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+                        <button type="button"  class="button button-blue btn btn-primary"
+                        onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+
+                    <h6>Результат</h6>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+
+                    <input class="form" type="submit" value="Сохранить" style="background-color: rgb(99, 123, 212);">
+                </form>
+                </p>
+
+            </div>
+        </div>
+        <div id="modal5" class="modal">
+            <div class="modal-content" style="width: 1000px;">
+                <span onclick="document.getElementById('modal5').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+                <p>
+                <h6>Изначальная функция</h6>
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th scope="col">X</th>
+                            <th scope="col">Y</th>
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                </table>
+
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal2').style.display='flex'">Создать TabulatedFunction </button>
+                <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+
+                    <button type="button"  class="button button-blue btn btn-primary"
+                    onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+
+
+                <h6>Результат</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">X</th>
+                            <th scope="col">Y</th>
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                </table>
+                <input class="form" type="submit" value="Сохранить" style="background-color: rgb(99, 123, 212);">
+
+                </p>
+            </div>
+        </div>
+
+        <!---окно таб фанкшн-->
+        <div id="modal2" class="modal">
+            <div class="modal-content" style="width: 700px;">
+                <span onclick="document.getElementById('modal2').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+
+                <p>
+                <form>
+                    <lable for="NumberOfPoint">Количество точек:</lable>
+
+                    <input class="form" type="number" id="NumberOfPoint" name="NumberOfPoint" value=" "><br>
+
+                    <button style="background-color:#98FB98 ;" type="button" onclick="createTable()">OK</button>
+
+                    <table class="table" id="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                    <input class="form" type="submit" value="Создать" style="background-color: rgb(99, 123, 212);">
+                </form>
+                </p>
+            </div>
+        </div>
+        <!---окно матс фанкшн-->
+        <div id="modal3" class="modal">
+            <div class="modal-content" style="width: 700px;">
+                <span onclick="document.getElementById('modal3').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+                <p>
+                <form>
+                    <label for="function">Выберите функцию:</label>
+                    <select id="function" name="function">
+                        <option value="Cos">Cos(x)</option>
+                        <option value="Ln">Ln(x)</option>
+                    </select><br>
+                    <lable for="fnumber">Количество точек:</lable>
+                    <input class="form" type="number" id="fnumber" name="fnumber" value=" "><br>
+                    <lable for="fnumberXTo">Начало:</lable>
+                    <input class="form" type="number" id="fnumberXTo" name="fnumberXTo" value=" "><br>
+                    <lable for="fnumberXForm">Конец:</lable>
+                    <input class="form" type="number" id="fnumberXForm" name="fnumberXForm" value=" "><br>
+
+                    <input class="form" type="submit" value="Создать" style="background-color: rgb(99, 123, 212);">
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <div id="modal6" class="modal">
+            <div class="modal-content" style="width: 300px;">
+                <span onclick="document.getElementById('modal6').style.display='none'"
+                    style="float: right; cursor:pointer;">&times;</span>
+                <p>
+                    <form enctype="multipart/form-data" method="post">
+                        <p><input type="file" name="f">
+                            <input type="submit" value="Загрузить">
+                        </p>
+                    </form>
+                </p>
+            </div>
+        </div>
+</body>
+
+
+
+
+        <script>
+            function createTable() {
+
+                const countOfPoint = document.getElementById('NumberOfPoint').value;
+                const table = document.getElementById('table').getElementsByTagName('tbody')[0];
+               
+                
+                table.innerHTML = '';
+
+                for (let i = 0; i < countOfPoint; i++) {
+                    const row = table.insertRow(i);
+                    const Xcoloumn = row.insertCell(0);
+                    const Ycoloumn = row.insertCell(1);
+                    Xcoloumn.innerHTML = '<input class="form" type="number">';
+                    Ycoloumn.innerHTML = '<input class="form" type="number">';
+                }
+            }
+            
+        </script>
+
+</html>

@@ -1,278 +1,1086 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Dhurjati&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лаба 7</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
 
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
 
-        .modal-content {
-            background-color: rgb(186, 215, 234);
-            padding: 20px;
-            border-radius: 5px;
-        }
-    </style>
+    .modal-content {
+        background-color: rgb(186, 215, 234);
+        padding: 20px;
+        border-radius: 5px;
+    }
+</style>
 
 
-        <div class="container" style="padding-top: 200px;">
+<div class="container" style="padding-top: 200px;">
 
-            <div class="d-grid gap-2">
+    <div class="d-grid gap-2">
 
-                <button type="button" class=" button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal1').style.display='flex'">Настройки </button>
+        <button type="button" class=" button button-blue btn btn-primary"
+                onclick="openModal('ModalSettingOfFunction')">Настройки
+        </button>
 
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal2').style.display='flex'">Создать TabulatedFunction </button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openModal('ModalTabFunc')">Создать TabulatedFunction
+        </button>
 
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openModal('ModalMathFunc')">Создать MathFunction
+        </button>
 
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal4').style.display='flex'">Операции с функциями</button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openModal('ModalOperation')">Операции с функциями
+        </button>
 
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal5').style.display='flex'">Дифферинцирование функции</button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openModal('ModalDifferentFunc')">Дифферинцирование функции
+        </button>
+    </div>
+</div>
+
+
+<div id="ModalSettingOfFunction" class="modal">
+    <div class="modal-content" style="width: 700px;">
+                <span onclick="document.getElementById('ModalSettingOfFunction').style.display='none'"
+                      style="float: right; cursor:pointer;">&times;</span>
+        <p>
+        <div class="radio-buttons-container">
+            <div class="radio-button">
+                <input name="radio-group" id="radio2" class="radio-button__input" type="radio" checked>
+                <label for="radio2" class="radio-button__label">
+                    <span class="radio-button__custom"></span>
+                    ArrayTabulatedFunction
+                </label>
             </div>
-        </div>
-
-        
-
-        <div id="modal1" class="modal">
-            <div class="modal-content" style="width: 700px;">
-                <span onclick="document.getElementById('modal1').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
-                <p>
-                <form>
-                    <input type="radio" id="Array" name="fav" value="ArrayTabulatedFunction" checked>
-                    <label for="Array">ArrayTabulatedFunction</label><br>
-                    <input type="radio" id="Linked" name="fav" value="LinkedListTabulatedFunction">
-                    <label for="Linked">LinkedListTabulatedFunction</label><br>
-
-                </form>
-                </p>
+            <div class="radio-button">
+                <input name="radio-group" id="radio1" class="radio-button__input" type="radio">
+                <label for="radio1" class="radio-button__label">
+                    <span class="radio-button__custom"></span>
+                    LinkedListTabulatedFunction
+                </label>
             </div>
+
         </div>
+        </p>
+        <button class="modal-button" onclick="sendSettings()">ОК</button>
+    </div>
+</div>
 
-        <div id="modal4" class="modal">
-            <div class="modal-content" style="width: 1000px;">
-                <span onclick="document.getElementById('modal4').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
-                <p>
-                <form id="form">
-                    <label for="functionOption">Выберите операцию:</label>
-                    <select id="functionOption" name="function">
-                        <option value="Sum">Сложение</option>
-                        <option value="deduction">Вычетание</option>
-                        <option value="multiplication">Умножение</option>
-                        <option value="division">Деление</option>
-                    </select><br>
+<div id="ModalOperation" class="modal">
+    <div class="modal-content" style="width: 1000px;">
+        <span onclick="closeModal('ModalOperation')" style="float: right; cursor: pointer;">&times;</span>
+        <p>
+            <label for="operationSelect">Выберите операцию:</label>
+            <select id="operationSelect" name="operationSelect">
+                <option value="addition">Сложение</option>
+                <option value="subtraction">Вычетание</option>
+                <option value="multiplication">Умножение</option>
+                <option value="division">Деление</option>
+            </select><br>
 
-                    <h6>Первый операнд</h6>
-                    <table class="table" id="">
-                        <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                            </tr>
-                        </thead>
-                        <tbody> </tbody>
-                    </table>
+            <h6>Первый операнд</h6>
+            <table class="table" id="firstFunctionTable">
+                <thead>
+                <tr>
+                    <th scope="col">X</th>
+                    <th scope="col">Y</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-                    <button type="button"  class="button button-blue btn btn-primary" onclick="document.getElementById('modal2').style.display='flex'">Cоздать
-                        TabulatedFunction</button>
+            <button type="button" class="button button-blue btn btn-primary" onclick="openTabModalFromOperations()">
+                Cоздать
+                TabulatedFunction
+            </button>
 
-                    <button type="button"  class="button button-blue btn btn-primary"
-                        onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
-                        <button type="button"  class="button button-blue btn btn-primary"
-                        onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+            <button type="button" class="button button-blue btn btn-primary"
+                    onclick="openMathModalFromOperations()">Создать MathFunction
+            </button>
+        <button class="modal-button1" onclick="openFileInput('fileInput1','oper')">Загрузить</button>
+        <input type="file" id="fileInput1" style="display: none;" onchange="handleFileUpload(this)">
 
-                    <h6>Второй операнд</h6>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                            </tr>
-                        </thead>
-                        <tbody> </tbody>
-                    </table>
+            <h6>Второй операнд</h6>
+            <table class="table" id="secondFunctionTable">
+                <thead>
+                <tr>
+                    <th scope="col">X</th>
+                    <th scope="col">Y</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-                    <button type="button"  class="button button-blue btn btn-primary" onclick="document.getElementById('modal2').style.display='flex'">Cоздать
-                        TabulatedFunction</button>
+            <button type="button" class="button button-blue btn btn-primary" onclick="openTabModalFromOperations()">
+                Cоздать
+                TabulatedFunction
+            </button>
 
-                    <button type="button"  class="button button-blue btn btn-primary"
-                        onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
-                        <button type="button"  class="button button-blue btn btn-primary"
-                        onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+            <button type="button" class="button button-blue btn btn-primary"
+                    onclick="openMathModalFromOperations()">Создать MathFunction
+            </button>
+        <button class="modal-button1" onclick="openFileInput('fileInput2','oper')">Загрузить</button>
+        <input type="file" id="fileInput2" style="display: none;" onchange="handleFileUpload(this)">
 
-                    <h6>Результат</h6>
-                    <table class="table" >
-                        <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                            </tr>
-                        </thead>
-                        <tbody> </tbody>
-                    </table>
+            <h6>Результат</h6>
+            <table class="table" id="resultFunctionTable">
+                <thead>
+                <tr>
+                    <th scope="col">X</th>
+                    <th scope="col">Y</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-                    <input class="form" type="submit" value="Сохранить" style="background-color: rgb(99, 123, 212);">
-                </form>
-                </p>
+        <button class="modal-button" onclick="serializeOperationResult()">Сохранить</button>
+        <a id="downloadLink5" style="display: none"></a>
 
-            </div>
-        </div>
-        <div id="modal5" class="modal">
-            <div class="modal-content" style="width: 1000px;">
-                <span onclick="document.getElementById('modal5').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
-                <p>
-                <h6>Изначальная функция</h6>
-                <table class="table" >
-                    <thead>
-                        <tr>
-                            <th scope="col">X</th>
-                            <th scope="col">Y</th>
-                        </tr>
-                    </thead>
-                    <tbody> </tbody>
-                </table>
+        </p>
 
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal2').style.display='flex'">Создать TabulatedFunction </button>
-                <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal3').style.display='flex'">Создать MathFunction</button>
+    </div>
+</div>
+<div id="ModalDifferentFunc" class="modal">
+    <div class="modal-content" style="width: 1000px;">
+        <span onclick="closeModal('ModalDifferentFunc')" style="float: right; cursor: pointer;">&times;</span>
+        <p>
+        <h6>Изначальная функция</h6>
+        <table class="table" id="difFunctionTable">
+            <thead>
+            <tr>
+                <th scope="col">X</th>
+                <th scope="col">Y</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
-                    <button type="button"  class="button button-blue btn btn-primary"
-                    onclick="document.getElementById('modal6').style.display='flex'">Загрузить</button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openTabModalFromDif()">Создать TabulatedFunction
+        </button>
+        <button type="button" class="button button-blue btn btn-primary"
+                onclick="openMathModalFromDif()">Создать MathFunction
+        </button>
+
+        <button class="modal-button1" onclick="openFileInput('fileInput','diff')">Загрузить</button>
+        <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(this)">
 
 
-                <h6>Результат</h6>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">X</th>
-                            <th scope="col">Y</th>
-                        </tr>
-                    </thead>
-                    <tbody> </tbody>
-                </table>
-                <input class="form" type="submit" value="Сохранить" style="background-color: rgb(99, 123, 212);">
 
-                </p>
-            </div>
-        </div>
+        <h6>Результат</h6>
+        <table class="table" id="difResultFunctionTable">
+            <thead>
+            <tr>
+                <th scope="col">X</th>
+                <th scope="col">Y</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button class="modal-button" onclick="serializeDifFunction()">Сохранить</button>
+        <a id="downloadLink2" style="display: none"></a>
 
-        <!---окно таб фанкшн-->
-        <div id="modal2" class="modal">
-            <div class="modal-content" style="width: 700px;">
-                <span onclick="document.getElementById('modal2').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
+        </p>
+    </div>
+</div>
 
-                <p>
-                <form>
-                    <lable for="NumberOfPoint">Количество точек:</lable>
+<!---окно таб фанкшн-->
+<div id="ModalTabFunc" class="modal">
+    <div class="modal-content" style="width: 700px;">
+        <span onclick="closeModal('ModalTabFunc',null,null,null,null,null,null); resetCreationModal();" style="float: right; cursor: pointer;">&times;</span>
 
-                    <input class="form" type="number" id="NumberOfPoint" name="NumberOfPoint" value=" "><br>
+        <p>
 
-                    <button style="background-color:#98FB98 ;" type="button" onclick="createTable()">OK</button>
+            <lable for="numberInput">Количество точек:</lable>
 
-                    <table class="table" id="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                        </tbody>
-                    </table>
+            <input class="form" type="number" id="numberInput" name="numberInput" value=""><br>
 
-                    <input class="form" type="submit" value="Создать" style="background-color: rgb(99, 123, 212);">
-                </form>
-                </p>
-            </div>
-        </div>
-        <!---окно матс фанкшн-->
-        <div id="modal3" class="modal">
-            <div class="modal-content" style="width: 700px;">
-                <span onclick="document.getElementById('modal3').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
-                <p>
-                <form>
-                    <label for="function">Выберите функцию:</label>
-                    <select id="function" name="function">
-                        <option value="Cos">Cos(x)</option>
-                        <option value="Ln">Ln(x)</option>
-                    </select><br>
-                    <lable for="fnumber">Количество точек:</lable>
-                    <input class="form" type="number" id="fnumber" name="fnumber" value=" "><br>
-                    <lable for="fnumberXTo">Начало:</lable>
-                    <input class="form" type="number" id="fnumberXTo" name="fnumberXTo" value=" "><br>
-                    <lable for="fnumberXForm">Конец:</lable>
-                    <input class="form" type="number" id="fnumberXForm" name="fnumberXForm" value=" "><br>
+        <button type="button"  onclick="checkTabulatedFunction()">Ок</button><br>
 
-                    <input class="form" type="submit" value="Создать" style="background-color: rgb(99, 123, 212);">
-                </form>
-                </p>
-            </div>
-        </div>
+            <table class="table" id="dataTable">
+                <thead>
+                <tr>
+                    <th scope="col">X</th>
+                    <th scope="col">Y</th>
+                </tr>
+                </thead>
 
-        <div id="modal6" class="modal">
-            <div class="modal-content" style="width: 300px;">
-                <span onclick="document.getElementById('modal6').style.display='none'"
-                    style="float: right; cursor:pointer;">&times;</span>
-                <p>
-                    <form enctype="multipart/form-data" method="post">
-                        <p><input type="file" name="f">
-                            <input type="submit" value="Загрузить">
-                        </p>
-                    </form>
-                </p>
-            </div>
-        </div>
+                <tbody>
+                </tbody>
+            </table>
+
+            <input class="form" type="button" onclick="sendCreatedFunction()" value="Создать" style="background-color: rgb(99, 123, 212);">
+        <a id="createDownloadLink" style="display: none"></a>
+
+        </p>
+    </div>
+</div>
+<!---окно матс фанкшн-->
+<div id="ModalMathFunc" class="modal">
+    <div class="modal-content" style="width: 700px;">
+        <span onclick="closeModal('ModalMathFunc'); resetMathFunctionModal();" style="float: right; cursor: pointer;">&times;</span>
+        <p>
+            <label for="functionSelect">Выберите функцию:</label>
+            <select id="functionSelect" name="functionSelect">
+                <option value="UnitFunction">единичная)</option>
+                <option value="SqrFunction">квадратичная</option>
+                <option value="ZeroFunction">ноль</option>
+                <option value="IdentityFunction">тождественная функция</option>
+
+            </select><br>
+
+            <lable for="fnumber">Количество точек:</lable>
+            <input class="form" type="number" id="pointCountInput" name="pointCountInput" value=" "><br>
+            <lable for="fnumberXTo">Начало:</lable>
+            <input class="form" type="number" id="xFromInput" name="xFromInput" value=" "><br>
+            <lable for="fnumberXForm">Конец:</lable>
+            <input class="form" type="number" id="xToInput" name="xToInput" value=" "><br>
+
+            <button class="modal-button" onclick="checkMathFunction()">ОК</button>
+            <a id="mathDownloadLink" style="display: none"></a>
+        </p>
+    </div>
+</div>
+
 </body>
 
 
+<script>
+    let firstOperand = null;//1 операнд
+    let secondOperand = null;//2 операнд
+    let sizeOne = 0;
+    let sizeTwo = 0;
+    let currentTable = 1;
+    let MathFromOperation = false;//из окна операций хотим создать матс фанкшн
+    let MathFromDif = false;//из окна диффиринцирвоания хотим создать матс фанкшн
+    let TabFromOperation = false;//из окна операций таб фанкшн
+    let TabFromDif = false;//из окна дифферинцирования таб фанкшн
 
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'flex';
+    }
+    function openOperationsModal() {
+        // Очистка данных перед открытием модального окна
+        clearTableData('firstFunctionTable');
+        clearTableData('secondFunctionTable');
+        clearTableData('resultFunctionTable');
 
-        <script>
-            function createTable() {
+        // Открываем модальное окно
+        openModal('ModalOperation');
+    }
+    function openDifferentModal() {
+        // Очистка данных перед открытием модального окна
+        clearTableData('firstFunctionTable');
+        clearTableData('secondFunctionTable');
+        clearTableData('resultFunctionTable');
 
-                const countOfPoint = document.getElementById('NumberOfPoint').value;
-                const table = document.getElementById('table').getElementsByTagName('tbody')[0];
-               
-                
-                table.innerHTML = '';
+        // Открываем модальное окно
+        openModal('ModalDifferentFunc');
+    }
+    function clearTableData(tableId) {
+        const tableBody = document.getElementById(tableId).querySelector('tbody');
+        tableBody.innerHTML = '';
 
-                for (let i = 0; i < countOfPoint; i++) {
-                    const row = table.insertRow(i);
-                    const Xcoloumn = row.insertCell(0);
-                    const Ycoloumn = row.insertCell(1);
-                    Xcoloumn.innerHTML = '<input class="form" type="number">';
-                    Ycoloumn.innerHTML = '<input class="form" type="number">';
+    }
+
+    function resetCreationModal() {
+        // Сбрасываем значения полей ввода
+        document.getElementById('numberInput').value = '';
+        // Очищаем таблицу
+        document.querySelector('#dataTable tbody').innerHTML = '';
+        // Другие поля ввода, которые нужно сбросить, добавляйте сюда
+    }
+    function openTabModalFromOperations() {
+        TabFromOperation = true;
+        openModal('ModalTabFunc');
+    }
+
+    function openTabModalFromDif() {
+        TabFromDif = true
+        openModal('ModalTabFunc');
+    }
+    function openMathModalFromOperations() {
+        MathFromOperation = true
+        openModal('ModalMathFunc');
+    }
+    function openMathModalFromDif() {
+        MathFromDif = true
+        openModal('ModalMathFunc');
+    }
+
+    function resetTabModal() {
+        // Сбрасываем значения полей ввода
+        document.getElementById('numberInput').value = '';
+        // Очищаем таблицу
+        document.querySelector('#dataTable tbody').innerHTML = '';
+    }
+
+    function resetMathFunModal() {
+        // Сбрасываем значения полей ввода
+        document.getElementById('functionSelect').value = 'ConstantFunction';
+        document.getElementById('pointCountInput').value = '';
+        document.getElementById('xFromInput').value = '';
+        document.getElementById('xToInput').value = '';
+    }
+    function sendSettings() {
+        let selectors = document.querySelectorAll('input[type="radio"][name="radio-group"]');
+        let type;
+        if (selectors.item(0).checked)
+            type = "ArrayTabulatedFunction";
+        else type = "LinkedListTabulatedFunction";
+        $.ajax({
+            url: "/setSettings",
+            type: "POST",
+            data: ({functionSelect: type}),
+            dataType: "text",
+            success: closeModal('ModalSettingOfFunction')
+        });
+    }
+
+    function checkMathFunction() {
+        if (document.getElementById("pointCountInput").value < 2){
+            alert("Количество точке должно быть больше 1!");
+        } if (document.getElementById("xFromInput").value > document.getElementById("xToInput").value) {
+            alert("Значение начала промежутка должно быть больше значения конца!");
+        } else sendCreatedMathFunction();
+    }
+
+    function sendCreatedMathFunction() {
+        if (MathFromDif) {
+            $.ajax({
+                url: "/differentiateMathFunction",
+                type: "POST",
+                data: ({functionSelect: document.getElementById("functionSelect").value, pointCount: document.getElementById("pointCountInput").value,
+                    xFrom: document.getElementById("xFromInput").value, xTo: document.getElementById("xToInput").value} ),
+                dataType: "text",
+                success: function(response) {
+                    let arr = response.split(':');
+                    let inputFuncArray = arr[0].split('|');
+                    let diffFuncArray = arr[1].split('|');
+                    let arrayInputXString = inputFuncArray[0].split('_');
+                    let arrayInputYString = inputFuncArray[1].split('_');
+                    let arrayInputX = [];
+                    let arrayInputY = [];
+                    for (let i = 0; i < arrayInputXString.length; i++){
+                        arrayInputX[i] = parseFloat(arrayInputXString[i]);
+                        arrayInputY[i] = parseFloat(arrayInputYString[i]);
+                    }
+                    let arrayOutputXString = diffFuncArray[0].split('_');
+                    let arrayOutputYString = diffFuncArray[1].split('_');
+                    let arrayOutputX = [];
+                    let arrayOutputY = [];
+                    for (let i = 0; i < arrayOutputXString.length; i++){
+                        arrayOutputX[i] = parseFloat(arrayOutputXString[i]);
+                        arrayOutputY[i] = parseFloat(arrayOutputYString[i]);
+                    }
+                    closeModal('ModalMathFunc',arrayInputX,arrayInputY,arrayOutputX,arrayOutputY);
+                }
+            });
+        } else if (MathFromOperation){
+
+            if (firstOperand === null){
+                $.ajax({
+                    url: "/getMathFunction",
+                    type: "POST",
+                    data: ({functionSelect: document.getElementById("functionSelect").value, pointCount: document.getElementById("pointCountInput").value,
+                        xFrom: document.getElementById("xFromInput").value, xTo: document.getElementById("xToInput").value} ),
+                    dataType: "text",
+                    success: function(response) {
+                        let arr = response.split('|');
+                        let arrayInputXString = arr[0].split('_');
+                        let arrayInputYString = arr[1].split('_');
+                        let arrayInputX = [];
+                        let arrayInputY = [];
+                        for (let i = 0; i < arrayInputXString.length; i++){
+                            arrayInputX[i] = parseFloat(arrayInputXString[i]);
+                            arrayInputY[i] = parseFloat(arrayInputYString[i]);
+                        }
+                        firstOperand = arr[0]+"|"+arr[1];
+                        closeModal('ModalMathFunc',arrayInputX,arrayInputY,null,null,null,null);
+                    }
+                });
+            } else {
+                let operationType = document.getElementById("operationSelect").value;
+                $.ajax({
+                    url: "/calculateMathOperationResult",
+                    type: "POST",
+                    data: ({operationType:operationType, firstOperand:firstOperand,functionSelect: document.getElementById("functionSelect").value, pointCount: document.getElementById("pointCountInput").value,
+                        xFrom: document.getElementById("xFromInput").value, xTo: document.getElementById("xToInput").value} ),
+                    dataType: "text",
+                    success: function(response) {
+                        let arr = response.split(':');
+                        let secFuncArray = arr[0].split('|');
+                        let resFuncArray = arr[1].split('|');
+                        let arraySecXString = secFuncArray[0].split('_');
+                        let arraySecYString = secFuncArray[1].split('_');
+                        let arraySecX = [];
+                        let arraySecY = [];
+                        for (let i = 0; i < arraySecXString.length; i++){
+                            arraySecX[i] = parseFloat(arraySecXString[i]);
+                            arraySecY[i] = parseFloat(arraySecYString[i]);
+                        }
+                        let arrayResXString = resFuncArray[0].split('_');
+                        let arrayResYString = resFuncArray[1].split('_');
+                        let arrayResX = [];
+                        let arrayResY = [];
+                        for (let i = 0; i < arrayResXString.length; i++){
+                            arrayResX[i] = parseFloat(arrayResXString[i]);
+                            arrayResY[i] = parseFloat(arrayResYString[i]);
+                        }
+                        let firstArr = firstOperand.split('|');
+                        let arrayFirstXString = firstArr[0].split('_');
+                        let arrayFirstYString = firstArr[1].split('_');
+                        let arrayFirstX = [];
+                        let arrayFirstY = [];
+                        for (let i = 0; i < arrayFirstXString.length; i++){
+                            arrayFirstX[i] = parseFloat(arrayFirstXString[i]);
+                            arrayFirstY[i] = parseFloat(arrayFirstYString[i]);
+                        }
+                        closeModal('ModalMathFunc',arrayFirstX,arrayFirstY,arrayResX,arrayResY,arraySecX,arraySecY);
+                    }
+                });
+            }
+        } else {
+            $.ajax({
+                url: "/serializeMathFunction",
+                type: "POST",
+                data: ({functionSelect: document.getElementById("functionSelect").value, pointCount: document.getElementById("pointCountInput").value,
+                    xFrom: document.getElementById("xFromInput").value, xTo: document.getElementById("xToInput").value} ),
+                dataType: "text",
+                success: function (response) {
+                    console.log(response);
+                    const blob = new Blob([response], {type: 'text/plain'});
+                    const downloadLink = document.getElementById("mathDownloadLink");
+                    downloadLink.href = URL.createObjectURL(blob);
+                    const fileName = prompt('Введите название файла:', 'MathFunction.txt');
+                    if (fileName) {
+                        downloadLink.download = fileName;
+                        downloadLink.click();
+                        //const buttonContainer = event.currentTarget.parentElement;
+                    }
+                }
+            });
+            closeModal('ModalMathFunc',null,null,null,null);
+        }
+    }
+
+    function sendCreatedFunction(){
+        if (TabFromDif){//если находимся в окне дифферинцирования
+            var X = [];
+            var Y = [];
+            var inputsX = document.querySelectorAll('input[type="number"][name="inputX"]');
+            var inputsY = document.querySelectorAll('input[type="number"][name="inputY"]');
+
+            for (let i = 0; i <inputsX.length; ++i){
+                var valueX = parseFloat(inputsX[i].value);
+                var valueY = parseFloat(inputsY[i].value);
+                X.push(valueX);
+                Y.push(valueY)
+            }
+            const stringX = X.join('_');
+            const stringY = Y.join('_');
+            $.ajax({
+                url: "/differentiateFunction",
+                type: "POST",
+                data: ({X: stringX,Y: stringY}),
+                dataType: "text",
+                success: function(response) {
+                    let arr = response.split('|');
+                    let arrayXString = arr[0].split('_');
+                    let arrayYString = arr[1].split('_');
+                    let arrayX = [];
+                    let arrayY = [];
+                    for (let i = 0; i < arrayXString.length; i++){
+                        arrayX[i] = parseFloat(arrayXString[i]);
+                        arrayY[i] = parseFloat(arrayYString[i]);
+                    }
+                    closeModal('ModalTabFunc',null,null,arrayX,arrayY);
+                }
+            });
+        }
+        else if (TabFromOperation){//если находимся в окне операций
+            if (firstOperand === null){
+                var X = []; var Y = [];
+                var inputsX = document.querySelectorAll('input[type="number"][name="inputX"]');
+                var inputsY = document.querySelectorAll('input[type="number"][name="inputY"]');
+                for (let i = 0; i <inputsX.length; ++i){
+                    var valueX = parseFloat(inputsX[i].value);
+                    var valueY = parseFloat(inputsY[i].value);
+                    X.push(valueX);
+                    Y.push(valueY);
+                }
+                const stringX = X.join('_');
+                const stringY = Y.join('_');
+                firstOperand = stringX+'|'+stringY;
+                closeModal('ModalTabFunc',null,null,null,null);
+            } else {
+                var X = [];
+                var Y = [];
+                var inputsX = document.querySelectorAll('input[type="number"][name="inputX"]');
+                var inputsY = document.querySelectorAll('input[type="number"][name="inputY"]');
+                for (let i = 0; i < inputsX.length; ++i) {
+                    var valueX = parseFloat(inputsX[i].value);
+                    var valueY = parseFloat(inputsY[i].value);
+                    X.push(valueX);
+                    Y.push(valueY);
+                }
+                const stringX = X.join('_');
+                const stringY = Y.join('_');
+                let secondOperand = stringX + '|' + stringY;
+                let operationType = document.getElementById("operationSelect").value;
+                $.ajax({
+                    url: "/calculateOperationResult",
+                    type: "POST",
+                    data: ({
+                        operationType: operationType,firstOperand:firstOperand,secondOperand:secondOperand}),
+                    dataType: "text",
+                    success: function (response) {
+                        let arr = response.split('|');
+                        alert(response);
+                        let arrayXString = arr[0].split('_');
+                        let arrayYString = arr[1].split('_');
+                        let arrayX = [];
+                        let arrayY = [];
+                        for (let i = 0; i < arrayXString.length; i++){
+                            arrayX[i] = parseFloat(arrayXString[i]);
+                            arrayY[i] = parseFloat(arrayYString[i]);
+                        }
+                        closeModal('ModalTabFunc',null,null,arrayX,arrayY);
+                        firstOperand = null;
+                    }
+                });
+
+            }
+        } else {//если находимся на главной странице
+            var X = []; var Y = [];
+            var inputsX = document.querySelectorAll('input[type="number"][name="inputX"]');
+            var inputsY = document.querySelectorAll('input[type="number"][name="inputY"]');
+            for (let i = 0; i <inputsX.length; ++i){
+                var valueX = parseFloat(inputsX[i].value);
+                var valueY = parseFloat(inputsY[i].value);
+                X.push(valueX);
+                Y.push(valueY);
+            }
+            const stringX = X.join('_');
+            const stringY = Y.join('_');
+            $.ajax({
+                url: "/serializeTabulatedFunction",
+                type: "POST",
+                data: ({X: stringX,Y: stringY}),
+                dataType: "text",
+                success: function(response) {
+                    const blob = new Blob([response], {type: 'text/plain'});
+                    const downloadLink = document.getElementById("createDownloadLink");
+                    downloadLink.href = URL.createObjectURL(blob);
+                    const fileName = prompt('Введите название файла:', 'название_файла.txt');
+                    if (fileName) {
+                        downloadLink.download = fileName;
+                        downloadLink.click();
+                        //const buttonContainer = event.currentTarget.parentElement;
+                    }
+                }
+            });
+            closeModal('ModalTabFunc',null,null,null,null);
+        }
+    }
+
+    function serializeDifFunction(){
+        var X = []; var Y = [];
+        var inputsX = document.querySelectorAll('input[type="text"][name="resX"]');
+        var inputsY = document.querySelectorAll('input[type="text"][name="resY"]');
+        for (let i = 0; i <inputsX.length; ++i){
+            var valueX = parseFloat(inputsX[i].value);
+            var valueY = parseFloat(inputsY[i].value);
+            X.push(valueX);
+            Y.push(valueY)
+        }
+        const stringX = X.join('_');
+        const stringY = Y.join('_');
+        $.ajax({
+            url: "/serializeTabulatedFunction",
+            type: "POST",
+            data: ({X: stringX,Y: stringY}),
+            dataType: "text",
+            success: function(response) {
+                const blob = new Blob([response], { type: 'text/plain' });
+                const downloadLink = document.getElementById("downloadLink2");
+                downloadLink.href = URL.createObjectURL(blob);
+                const fileName = prompt('Введите название файла:', 'DifferentialResult.txt');
+                if (fileName) {
+                    downloadLink.download = fileName;
+                    downloadLink.click();
+                    //const buttonContainer = event.currentTarget.parentElement;
                 }
             }
-            
-        </script>
+        });
+        closeModal('ModalTabFunc',null,null,null,null,null,null);
+    }
+
+    function deserializeDiffFunction(str){
+
+        $.ajax({
+            url: "/deserializeAndDiffTabulatedFunction",
+            type: "POST",
+            data: ({str: str}),
+            dataType: "text",
+            success: function(response) {
+                let arr = response.split(':');
+                let FuncArray = arr[0].split('|');
+                let diffFuncArray = arr[1].split('|');
+                let funcXString = FuncArray[0].split('_');
+                let funcYString = FuncArray[1].split('_');
+                let arrayFuncX = [];
+                let arrayFuncY = [];
+                for (let i = 0; i < funcXString.length; i++){
+                    arrayFuncX[i] = parseFloat(funcXString[i]);
+                    arrayFuncY[i] = parseFloat(funcYString[i]);
+                }
+                let diffXString = diffFuncArray[0].split('_');
+                let diffYString = diffFuncArray[1].split('_');
+                let arrayDiffX = [];
+                let arrayDiffY = [];
+                for (let i = 0; i < diffXString.length; i++){
+                    arrayDiffX[i] = parseFloat(diffXString[i]);
+                    arrayDiffY[i] = parseFloat(diffYString[i]);
+                }
+                document.getElementById('pointCountInput').value = arrayFuncX.length;
+                generateTableForMath(arrayFuncX,arrayFuncY);
+                generateTableForRes(arrayDiffX,arrayDiffY);
+                TabFromDif = false;
+            }
+        });
+
+    }
+
+    function serializeOperationResult(){
+        var X = []; var Y = [];
+
+        var resX = document.querySelectorAll('input[type="text"][name="operResX"]');
+        var resY = document.querySelectorAll('input[type="text"][name="operResY"]');
+        for (let i = 0; i <resX.length; ++i){
+            var valueX = parseFloat(resX[i].value);
+            var valueY = parseFloat(resY[i].value);
+            X.push(valueX);
+            Y.push(valueY)
+        }
+        const stringX = X.join('_');
+        const stringY = Y.join('_');
+        $.ajax({
+            url: "/serializeOperationResult",
+            type: "POST",
+            data: ({X: stringX,Y: stringY}),
+            dataType: "text",
+            success: function(response) {
+                const blob = new Blob([response], { type: 'text/plain' });
+                const downloadLink = document.getElementById("downloadLink5");
+                downloadLink.href = URL.createObjectURL(blob);
+                const fileName = prompt('Введите название файла:', 'OperationResult.txt');
+                if (fileName) {
+                    downloadLink.download = fileName;
+                    downloadLink.click();
+                }
+            }
+        });
+        closeModal('ModalTabFunc',null,null,null,null);
+    }
+
+    function deserializeOperationFunction(str){
+        if (firstOperand == null) {
+            $.ajax({
+                url: "/deserializeTabulatedFunction",
+                type: "POST",
+                data: ({str: str}),
+                dataType: "text",
+                success: function(response) {
+                    firstOperand = response;
+                    let FuncArray = response.split('|');
+                    let funcXString = FuncArray[0].split('_');
+                    let funcYString = FuncArray[1].split('_');
+                    let arrayFuncX = [];
+                    let arrayFuncY = [];
+                    for (let i = 0; i < funcXString.length; i++){
+                        arrayFuncX[i] = parseFloat(funcXString[i]);
+                        arrayFuncY[i] = parseFloat(funcYString[i]);
+                    }
+                    document.getElementById('pointCountInput').value = arrayFuncX.length;
+                    generateTableForMathOperation(arrayFuncX,arrayFuncY);
+                    currentTable++;
+                }
+            });
+            TabFromOperation = false;
+        } else {
+            $.ajax({
+                url: "/deserializeTabulatedFunction",
+                type: "POST",
+                data: ({str: str}),
+                dataType: "text",
+                success: function(response) {
+                    let FuncArray = response.split('|');
+                    let funcXString = FuncArray[0].split('_');
+                    let funcYString = FuncArray[1].split('_');
+                    let arrayFuncX = [];
+                    let arrayFuncY = [];
+                    for (let i = 0; i < funcXString.length; i++){
+                        arrayFuncX[i] = parseFloat(funcXString[i]);
+                        arrayFuncY[i] = parseFloat(funcYString[i]);
+                    }
+                    document.getElementById('pointCountInput').value = arrayFuncX.length;
+                    generateTableForMathOperation(arrayFuncX,arrayFuncY);
+                    calculateOperationFileResult(response);
+                }
+            });
+
+        }
+    }
+
+    function calculateOperationFileResult(secondOperand) {
+        let operationType = document.getElementById("operationSelect").value;
+        $.ajax({
+            url: "/calculateOperationResult",
+            type: "POST",
+            data: ({
+                operationType: operationType,firstOperand:firstOperand,secondOperand:secondOperand}),
+            dataType: "text",
+            success: function (response) {
+                let arr = response.split('|');
+                let arrayXString = arr[0].split('_');
+                let arrayYString = arr[1].split('_');
+                let arrayX = [];
+                let arrayY = [];
+                for (let i = 0; i < arrayXString.length; i++){
+                    arrayX[i] = parseFloat(arrayXString[i]);
+                    arrayY[i] = parseFloat(arrayYString[i]);
+                }
+                firstOperand = null;
+                generateTableForOperation(arrayX,arrayY);
+            }
+        });
+    }
+
+    function resetMathFunctionModal() {
+        // Сбрасываем значения полей ввода
+        document.getElementById('functionSelect').value = 'ConstantFunction';
+        document.getElementById('pointCountInput').value = '';
+        document.getElementById('xFromInput').value = '';
+        document.getElementById('xToInput').value = '';
+        // Другие поля ввода, которые нужно сбросить, добавляйте сюда
+    }
+    function closeModal(modalId,inputX,inputY,outputsX,outputsY,inputX1,inputY1) {//Закрытие окон
+        const modal = document.getElementById(modalId);
+        if (modalId === 'ModalTabFunc') {
+            // Если окно "Создание" закрывается и оно открыто из "Операции", тогда передаем данные в "Операции"
+            if (TabFromOperation) {
+                fillOperationsTable();
+                if (sizeOne === sizeTwo){
+                    sizeOne = 0;
+                    sizeTwo = 0;
+                    currentTable = 1;
+                    generateTableForOperation(outputsX,outputsY);
+                }
+                TabFromOperation = false; // сбрасываем флаг
+            } else // Если окно "Создание" закрывается и оно открыто из "Диф", тогда передаем данные в "Диф"
+            if (TabFromDif) {
+                fillOperationsTableDif(outputsX,outputsY);
+                TabFromOperation = false; // сбрасываем флаг
+            }
+        }
+        if (modalId === 'ModalMathFunc'){
+            if(MathFromDif){
+                generateTableForMath(inputX,inputY);
+                generateTableForRes(outputsX,outputsY);
+                document.getElementById('ModalMathFunc').style.display = 'none';
+                MathFromDif = false;
+            }
+            else{
+                if(MathFromOperation){
+                    if ( currentTable % 2 !== 0) {
+                        generateTableForMathOperation(inputX,inputY);
+                        currentTable++;
+                    }
+                    else generateTableForMathOperation(inputX1,inputY1);
+
+                    if (sizeOne === sizeTwo) generateTableForOperation(outputsX,outputsY);
+                    document.getElementById('ModalMathFunc').style.display = 'none';
+                    MathFromOperation = false;
+                }
+            }
+        }
+        modal.style.display = 'none';
+        resetMathFunModal();
+        resetTabModal();
+        if (modalId === 'ModalTabFunc') {
+            // После переноса данных в таблицу "Операции", закрываем окно "Создание"
+            document.getElementById('ModalTabFunc').style.display = 'none';
+        }
+        resetCreationModal();
+    }
+    function generateTableForRes(outputsX,outputsY) {//???
+        const tableBody = document.querySelector('#difResultFunctionTable tbody');
+        tableBody.innerHTML = '';
+
+        for (var i = 0; i < outputsX.length; i++) {
+            var newRow = tableBody.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+
+            cellX.innerHTML = '<input type="text" name="resX" value="' + outputsX[i] + '" readonly>';
+            cellY.innerHTML = '<input type="text" name="resY" value="' + outputsY[i] + '" readonly>';
+        }
+    }
+
+    function generateTableForMath(inputX,inputY) {//???
+        const numberInput = document.getElementById('pointCountInput').value;
+        const tableBody = document.querySelector('#difFunctionTable tbody');
+        tableBody.innerHTML = '';
+
+        for (var i = 0; i < numberInput; i++) {
+            var newRow = tableBody.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+
+            cellX.innerHTML = '<input type="text" name="mathX" value="' + inputX[i] + '" readonly>';
+            cellY.innerHTML = '<input type="text" name="mathY" value="' + inputY[i] + '" readonly>';
+        }
+    }
+
+    function generateTableForOperation(outputsX,outputsY) {//генерация таблицы для значений табфункции???
+        const tableBody = document.querySelector('#resultFunctionTable tbody');
+        tableBody.innerHTML = '';
+        for (var i = 0; i < outputsX.length; i++) {
+            var newRow = tableBody.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+            cellX.innerHTML = '<input type="text" name="operResX" value="' + outputsX[i] + '" readonly>';
+            cellY.innerHTML = '<input type="text" name="operResY" value="' + outputsY[i] + '" readonly>';
+        }
+    }
+
+    function generateTableForMathOperation(inputX,inputY) {//генерация таблицы для значений мат функции????
+        const numberInput = document.getElementById('pointCountInput').value;
+        if (currentTable % 2 !== 0){
+            const tableBody = document.querySelector('#firstFunctionTable tbody');
+            sizeOne = numberInput;
+            tableBody.innerHTML = '';
+
+            for (var i = 0; i < numberInput; i++) {
+                var newRow = tableBody.insertRow();
+                var cellX = newRow.insertCell(0);
+                var cellY = newRow.insertCell(1);
+
+                cellX.innerHTML = '<input type="text" name="resX" value="' + inputX[i] + '" readonly>';
+                cellY.innerHTML = '<input type="text" name="resY" value="' + inputY[i] + '" readonly>';
+            }
+
+        }
+        else {
+            const tableBody = document.querySelector('#secondFunctionTable tbody');
+            sizeTwo = numberInput;
+            tableBody.innerHTML = '';
+
+            for (var i = 0; i < numberInput; i++) {
+                var newRow = tableBody.insertRow();
+                var cellX = newRow.insertCell(0);
+                var cellY = newRow.insertCell(1);
+
+                cellX.innerHTML = '<input type="text" name="resX" value="' + inputX[i] + '" readonly>';
+                cellY.innerHTML = '<input type="text" name="resY" value="' + inputY[i] + '" readonly>';
+            }
+
+        }
+    }
+
+   function checkTabulatedFunction() {
+        let inputValue = document.getElementById("numberInput").value;
+        if (inputValue < 2){
+            alert("Количество точек должно быть больше 1!");
+        } else
+        if (!Number.isInteger(+inputValue)){
+            alert("Количество точек должно быть целым");
+        } else {
+            generateTable();
+        }
+    }
+
+
+    function fillOperationsTable() {
+        var creationTable = document.querySelector('#dataTable');
+        var creationTableBody = creationTable.querySelector('tbody');
+        var Table = (currentTable % 2 === 0) ? 'secondFunctionTable' : 'firstFunctionTable';
+        var operationsTable = document.querySelector('#' + Table);
+        var operationsTableBody = operationsTable.querySelector('tbody');
+        operationsTableBody.innerHTML = '';
+        for (var i = 0; i < creationTableBody.rows.length; i++) {
+            var row = creationTableBody.rows[i];
+            var cellXValue = row.cells[0].querySelector('input').value;
+            var cellYValue = row.cells[1].querySelector('input').value;
+
+            var newRow = operationsTableBody.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+            cellX.innerHTML = '<input type="text" value="' + cellXValue + '" readonly>';
+            cellY.innerHTML = '<input type="text" value="' + cellYValue + '" readonly>';
+        }
+        currentTable++;
+    }
+
+    function openFileInput(id,field) {
+        document.getElementById(id).click();
+        if (field === "diff"){
+            TabFromDif = true;
+        } else if (field == "oper"){
+            TabFromOperation = true;
+        }
+    }
+
+    function handleFileUpload(input) {
+        var file = input.files[0]; // Получаем выбранный пользователем файл
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var fileContent = e.target.result; // Получаем содержимое файла в виде строки
+                if (TabFromDif){
+                    deserializeDiffFunction(fileContent);
+                } else if (TabFromOperation){
+                    deserializeOperationFunction(fileContent);
+                }
+            };
+            reader.readAsText(file); // Читаем файл как текстовую строку
+        }
+    }
+
+    function saveToFile(downloadLinkId) {
+        const dataToSave = "Здесь ваш текст или данные для сохранения";
+
+        // Создаем новый Blob (двоичные данные) из данных
+        const blob = new Blob([dataToSave], { type: 'text/plain' });
+
+        // Создаем ссылку и прикрепляем Blob к ней
+        const downloadLink = document.getElementById(downloadLinkId);
+        downloadLink.href = URL.createObjectURL(blob);
+
+        // Запрашиваем у пользователя название файла
+        const fileName = prompt('Введите название файла:', 'название_файла.txt');
+
+        // Если пользователь ввел название файла, продолжаем
+        if (fileName) {
+            // Устанавливаем атрибут download с указанием названия файла
+            downloadLink.download = fileName;
+
+            // Генерируем событие клика на ссылке
+            downloadLink.click();
+
+            const buttonContainer = event.currentTarget.parentElement;
+            if (buttonContainer.classList.contains('button-container1')) {
+                // Если вызвана из button-container1, то ничего не делаем
+            } else {
+                // Если вызвана из modal-button, то закрываем модальное окно
+                closeModal('ModalOperation');
+                closeModal('ModalDifferentFunc');
+            }
+        }
+    }
+
+
+    function fillOperationsTableDif(outputsX,outputsY) {
+// Получите данные из таблицы "Создание"
+        const creationTable = document.querySelector('#dataTable');
+        const creationTableBody = creationTable.querySelector('tbody');
+
+// Очистите таблицу "Операции"
+        const operationsTable = document.querySelector('#difFunctionTable');
+        var operationsTableBody = operationsTable.querySelector('tbody');
+        operationsTableBody.innerHTML = '';
+
+// Перенесите данные из таблицы "Создание" в таблицу "Операции"
+        for (var i = 0; i < creationTableBody.rows.length; i++) {
+            var row = creationTableBody.rows[i];
+            var cellXValue = row.cells[0].querySelector('input').value;
+            var cellYValue = row.cells[1].querySelector('input').value;
+
+            var newRow = operationsTableBody.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+
+            cellX.innerHTML = '<input type="text" value="' + cellXValue + '" readonly>';
+            cellY.innerHTML = '<input type="text" value="' + cellYValue + '" readonly>';
+        }
+        const operationsTableRes = document.querySelector('#difResultFunctionTable');
+        var operationsTableBodyRes = operationsTableRes.querySelector('tbody');
+        operationsTableBodyRes.innerHTML = '';
+
+// Перенесите данные из таблицы "Создание" в таблицу "Операции"
+        for (var i = 0; i < outputsX.length; i++) {
+            var newRow = operationsTableBodyRes.insertRow();
+            var cellX = newRow.insertCell(0);
+            var cellY = newRow.insertCell(1);
+
+            cellX.innerHTML = '<input type="text" name="resX" value="' + outputsX[i] + '" readonly>';
+            cellY.innerHTML = '<input type="text" name="resY" value="' + outputsY[i] + '" readonly>';
+        }
+
+    }
+
+    function generateTable() {
+        const numberInput = document.getElementById('numberInput').value;
+        const tableBody = document.querySelector('#dataTable tbody');
+        tableBody.innerHTML = '';
+        if (currentTable % 2 === 0) {
+            sizeTwo = numberInput;
+        } else {
+            sizeOne = numberInput;
+        }
+
+        let prevXValue = null; // Добавляем переменную для хранения предыдущего значения X
+
+        for (let i = 0; i < numberInput; i++) {
+            const row = tableBody.insertRow();
+            const cellX = row.insertCell(0);
+            const cellY = row.insertCell(1);
+
+            const inputX = document.createElement('input');
+            inputX.type = 'number';
+            inputX.name = 'inputX';
+            inputX.step = 'any';
+
+// Проверка, что текущее значение X больше предыдущего
+            inputX.addEventListener('input', function () {
+                const currentXValue = parseFloat(inputX.value);
+                if (prevXValue !== null && currentXValue <= prevXValue) {
+                    alert('Значение X должно быть больше предыдущего значения!');
+                    inputX.value = ''; // Очистим поле в случае ошибки
+                }
+                prevXValue = currentXValue;
+            });
+
+            cellX.appendChild(inputX);
+            cellY.innerHTML = `<input type="number" name="inputY" step="any">`;
+        }
+    }
+
+</script>
 
 </html>

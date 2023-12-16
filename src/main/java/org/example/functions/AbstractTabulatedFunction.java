@@ -5,7 +5,7 @@ import exceptions.DifferentLengthOfArraysException;
 
 import java.util.Iterator;
 
-abstract class AbstractTabulatedFunction implements TabulatedFunction {
+public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
